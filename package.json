@@ -1,0 +1,30 @@
+{
+  "name": "qingful",
+  "version": "0.0.1",
+  "description": "",
+  "main": "lib/qingful.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "bookshelf": "^0.13.3",
+    "bookshelf-paranoia": "^0.11.0",
+    "bookshelf-uuid": "^1.0.0",
+    "dotenv": "^5.0.1",
+    "glob": "^7.1.2",
+    "knex": "^0.14.6",
+    "koa": "^2.5.1",
+    "koa-body": "^2.5.0",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "koa-static-cache": "^5.1.2",
+    "lodash": "^4.17.10",
+    "moment": "^2.22.1",
+    "mysql": "^2.15.0",
+    "redis": "^2.8.0"
+  }
+}

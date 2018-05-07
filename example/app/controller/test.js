@@ -16,7 +16,7 @@ module.exports = class extends qingful.controller {
 
 	async index() {
 		console.log("index");
-		this.success(a);
+		this.success("Hello Qingful");
 	}
 
 	async _after_index() {

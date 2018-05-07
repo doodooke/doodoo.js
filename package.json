@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "bluebird": "^3.5.1",
     "bookshelf": "^0.13.3",
     "bookshelf-paranoia": "^0.11.0",
@@ -25,6 +26,7 @@
     "lodash": "^4.17.10",
     "moment": "^2.22.1",
     "mysql": "^2.15.0",
-    "redis": "^2.8.0"
+    "redis": "^2.8.0",
+    "yn": "^2.0.0"
   }
 }

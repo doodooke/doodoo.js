@@ -4,8 +4,12 @@
   "description": "",
   "main": "lib/qingful.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "eslint": "eslint ./lib",
+    "eslint-fix": "eslint --fix ./lib"
   },
+  "pre-commit": [
+    "eslint"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -28,5 +32,12 @@
     "mysql": "^2.15.0",
     "redis": "^2.8.0",
     "yn": "^2.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.12.1"
   }
 }

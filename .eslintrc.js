@@ -11,8 +11,8 @@ module.exports = {
         "prettier/prettier": "error",
         "no-console": 0, // 禁用 console
         "brace-style": [2, "1tbs"], // 代码书写格式验证
-        // "camelcase": [2, { "properties": "never" }], // 允许使用驼峰命名法
-        camelcase: 0, // 允许使用驼峰命名法
+        "camelcase": [2, { "properties": "never" }], // 允许使用驼峰命名法
+        // camelcase: 0, // 允许使用驼峰命名法
         eqeqeq: 2, //必须使用全等
         "prefer-arrow-callback": 2, // 要求使用箭头函数作为回调
         "no-var": 2, // 禁用var，用let和const代替

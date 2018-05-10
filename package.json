@@ -19,6 +19,7 @@
     "bookshelf": "^0.13.3",
     "bookshelf-paranoia": "^0.11.0",
     "bookshelf-uuid": "^1.0.0",
+    "debug": "^3.1.0",
     "dotenv": "^5.0.1",
     "glob": "^7.1.2",
     "knex": "^0.14.6",

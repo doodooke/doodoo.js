@@ -5,7 +5,7 @@
   "main": "lib/qingful.js",
   "scripts": {
     "test": "nyc ava",
-    "doc": "jsdoc -r --readme ./README.md -d doc ./lib",
+    "doc": "jsdoc -r --readme ./README.md -d docs ./lib",
     "eslint": "eslint ./lib",
     "eslint-fix": "eslint --fix ./lib"
   },

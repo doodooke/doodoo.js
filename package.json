@@ -1,7 +1,7 @@
 {
   "name": "qingful",
-  "version": "0.0.2",
-  "description": "",
+  "version": "0.0.3",
+  "description": "Qingful web app framework",
   "main": "lib/qingful.js",
   "scripts": {
     "test": "nyc ava",
@@ -12,9 +12,16 @@
   "pre-commit": [
     "eslint"
   ],
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "web",
+    "app",
+    "http",
+    "application",
+    "framework",
+    "koa"
+  ],
+  "author": "heqing",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
     "bluebird": "^3.5.1",

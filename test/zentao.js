@@ -1,4 +1,4 @@
-const dotenv = require("dotenv/main");
+const dotenv = require("./../lib/dotenv/main");
 const { createIssue } = require("./../lib/global");
 
 dotenv.config();

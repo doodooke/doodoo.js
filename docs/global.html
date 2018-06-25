@@ -104,6 +104,164 @@
     
 
     
+    <h4 class="name" id="createIssue"><span class="type-signature">(async) </span>createIssue<span class="signature">(title, body)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Create git issue
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">title</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>body</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">body</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="global.js.html">global.js</a>, <a href="global.js.html#line66">line 66</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="ding"><span class="type-signature"></span>ding<span class="signature">(title, text, url)</span><span class="type-signature"></span></h4>
     
 
@@ -251,7 +409,165 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="global.js.html">global.js</a>, <a href="global.js.html#line34">line 34</a>
+        <a href="global.js.html">global.js</a>, <a href="global.js.html#line39">line 39</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="execCommand"><span class="type-signature"></span>execCommand<span class="signature">(command, options)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Exec command
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>command</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">command</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">options</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="global.js.html">global.js</a>, <a href="global.js.html#line153">line 153</a>
     </li></ul></dd>
     
 
@@ -386,7 +702,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="global.js.html">global.js</a>, <a href="global.js.html#line15">line 15</a>
+        <a href="global.js.html">global.js</a>, <a href="global.js.html#line20">line 20</a>
     </li></ul></dd>
     
 
@@ -430,7 +746,7 @@
     
 
     
-    <h4 class="name" id="gitCreateIssue"><span class="type-signature"></span>gitCreateIssue<span class="signature">(title, body)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="sign"><span class="type-signature"></span>sign<span class="signature">(data, secret)</span><span class="type-signature"></span></h4>
     
 
     
@@ -438,7 +754,7 @@
 
 
 <div class="description">
-    Create git issue
+    Get sha256 hmac signature
 </div>
 
 
@@ -474,7 +790,7 @@
 
         <tr>
             
-                <td class="name"><code>title</code></td>
+                <td class="name"><code>data</code></td>
             
 
             <td class="type">
@@ -490,14 +806,14 @@
 
             
 
-            <td class="description last">title</td>
+            <td class="description last">data</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>body</code></td>
+                <td class="name"><code>secret</code></td>
             
 
             <td class="type">
@@ -513,7 +829,7 @@
 
             
 
-            <td class="description last">body</td>
+            <td class="description last">secret</td>
         </tr>
 
     
@@ -554,7 +870,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="global.js.html">global.js</a>, <a href="global.js.html#line63">line 63</a>
+        <a href="global.js.html">global.js</a>, <a href="global.js.html#line141">line 141</a>
     </li></ul></dd>
     
 
@@ -598,13 +914,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Qingful.html">Qingful</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ding">ding</a></li><li><a href="global.html#getBookshelf">getBookshelf</a></li><li><a href="global.html#gitCreateIssue">gitCreateIssue</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Qingful.html">Qingful</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createIssue">createIssue</a></li><li><a href="global.html#ding">ding</a></li><li><a href="global.html#execCommand">execCommand</a></li><li><a href="global.html#getBookshelf">getBookshelf</a></li><li><a href="global.html#sign">sign</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri May 25 2018 11:31:41 GMT+0800 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Jun 25 2018 09:43:09 GMT+0800 (GMT+08:00)
 </footer>
 
 <script> prettyPrint(); </script>

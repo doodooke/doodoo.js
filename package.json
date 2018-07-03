@@ -1,6 +1,6 @@
 {
   "name": "qingful",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Qingful web app framework",
   "main": "lib/qingful.js",
   "scripts": {

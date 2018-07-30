@@ -37,7 +37,7 @@ const _knex = require("knex");
 const _bookshelf = require("bookshelf");
 const uuid = require("bookshelf-uuid");
 const paranoia = require("bookshelf-paranoia");
-const cache = require("./bookshelf/cache");
+const model = require("./bookshelf/model");
 const pagination = require("./bookshelf/pagination");
 
 /**
@@ -53,7 +53,7 @@ function getBookshelf(connection) {
     bookshelf.plugin(pagination);
     bookshelf.plugin(paranoia);
     bookshelf.plugin(uuid);
-    bookshelf.plugin(cache);
+    bookshelf.plugin(model);
 
     return bookshelf;
 }
@@ -65,99 +65,124 @@ function getBookshelf(connection) {
  * @param {string} url - url
  */
 function ding(title, text, url = process.env.DINGDING_URL) {
-    if (yn(process.env.DINGDING) &amp;&amp; url) {
-        return axios({
-            url: url,
-            method: "post",
-            timeout: 3000,
-            headers: {
-                "Content-Type": "application/json"
-            },
-            data: {
-                msgtype: "markdown",
-                markdown: {
-                    title: title,
-                    text: `#### ${title} ####\n${text}\n#### 时间：${moment().format(
-                        "YYYY-MM-DD HH:mm:ss"
-                    )} ####`
+    try {
+        if (yn(process.env.DINGDING) &amp;&amp; url) {
+            return axios({
+                url: url,
+                method: "post",
+                timeout: 3000,
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                data: {
+                    msgtype: "markdown",
+                    markdown: {
+                        title: title,
+                        text: `#### ${title} ####\n${text}\n#### 时间：${moment().format(
+                            "YYYY-MM-DD HH:mm:ss"
+                        )} ####`
+                    }
                 }
-            }
-        });
+            });
+        }
+    } catch (error) {
+        console.error("Ding Network fail");
     }
 }
 
 /**
  * Create git issue
  * @param {String} title title
- * @param {String} body body
+ * @param {String} body stack
  */
-async function createIssue(title, body) {
-    // git issue
-    if (yn(process.env.GIT_ISSUE) &amp;&amp; process.env.GIT_ISSUE_URL) {
-        await axios({
-            url: process.env.GIT_ISSUE_URL,
-            method: "post",
-            timeout: 3000,
-            headers: {
-                "Content-Type": "application/json"
-            },
-            auth: {
-                username: process.env.GIT_USERNAME,
-                password: process.env.GIT_PASSWORD
-            },
-            data: {
-                title: title,
-                body: body
-            }
-        });
+async function createIssue(
+    title,
+    stack,
+    options = {
+        gitIssueUrl: process.env.GIT_ISSUE_URL,
+        zentaoIssueUrl: process.env.ZENTAO_ISSUE_URL
     }
-    // zentao issue
-    if (yn(process.env.ZENTAO_ISSUE) &amp;&amp; process.env.ZENTAO_ISSUE_URL) {
-        const zentaoIssueUrl = new URL(process.env.ZENTAO_ISSUE_URL);
-        const zentaoUrl = `${zentaoIssueUrl.origin}${zentaoIssueUrl.pathname}`;
-
-        // zentao getSession
-        const session = await axios({
-            url: `${zentaoUrl}?m=api&amp;f=getSessionID&amp;t=json`,
-            timeout: 3000
-        });
-        const { sessionName, sessionID } = JSON.parse(session.data.data);
-
-        // zentao login
-        await axios({
-            url: `${zentaoUrl}?m=user&amp;f=login&amp;t=json&amp;${sessionName}=${sessionID}&amp;account=${
-                process.env.ZENTAO_USERNAME
-            }&amp;password=${process.env.ZENTAO_PASSWORD}`,
-            timeout: 3000
-        });
-
-        // zentao create bug
-        const form = new FormData();
-        form.append("product", zentaoIssueUrl.searchParams.get("productID"));
-        form.append("module", zentaoIssueUrl.searchParams.get("moduleID"));
-        form.append("openedBuild", "trunk");
-        form.append("title", title);
-        form.append("steps", body || title);
-
-        await axios({
-            url: `${
-                process.env.ZENTAO_ISSUE_URL
-            }&amp;t=json&amp;${sessionName}=${sessionID}`,
-            method: "post",
-            timeout: 3000,
-            headers: form.getHeaders(),
-            transformRequest: [
-                function() {
-                    return form;
+) {
+    try {
+        // git issue
+        if (yn(process.env.GIT_ISSUE) &amp;&amp; options.gitIssueUrl) {
+            await axios({
+                url: options.gitIssueUrl,
+                method: "post",
+                timeout: 3000,
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                auth: {
+                    username: process.env.GIT_USERNAME,
+                    password: process.env.GIT_PASSWORD
+                },
+                data: {
+                    title: title,
+                    body: `&lt;pre>${stack || title}&lt;/pre>`
                 }
-            ]
-        });
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        console.error("Git Error Issue Network fail");
+    }
 
-        // zentao logout
-        await axios({
-            url: `${zentaoUrl}?m=user&amp;f=logout&amp;t=json&amp;${sessionName}=${sessionID}`,
-            timeout: 3000
-        });
+    try {
+        // zentao issue
+        if (yn(process.env.ZENTAO_ISSUE) &amp;&amp; options.zentaoIssueUrl) {
+            const zentaoIssueUrl = new URL(options.zentaoIssueUrl);
+            const zentaoUrl = `${zentaoIssueUrl.origin}${
+                zentaoIssueUrl.pathname
+            }`;
+
+            // zentao getSession
+            const session = await axios({
+                url: `${zentaoUrl}?m=api&amp;f=getSessionID&amp;t=json`,
+                timeout: 3000
+            });
+            const { sessionName, sessionID } = JSON.parse(session.data.data);
+
+            // zentao login
+            await axios({
+                url: `${zentaoUrl}?m=user&amp;f=login&amp;${sessionName}=${sessionID}&amp;account=${
+                    process.env.ZENTAO_USERNAME
+                }&amp;password=${process.env.ZENTAO_PASSWORD}`,
+                timeout: 3000
+            });
+
+            // zentao create bug
+            const form = new FormData();
+            form.append(
+                "product",
+                zentaoIssueUrl.searchParams.get("productID")
+            );
+            form.append("module", zentaoIssueUrl.searchParams.get("moduleID"));
+            form.append("openedBuild", "trunk");
+            form.append("title", title);
+            form.append("steps", `&lt;pre>${stack || title}&lt;/pre>`);
+
+            await axios({
+                url: `${options.zentaoIssueUrl}&amp;${sessionName}=${sessionID}`,
+                method: "post",
+                timeout: 3000,
+                headers: form.getHeaders(),
+                transformRequest: [
+                    function() {
+                        return form;
+                    }
+                ]
+            });
+
+            // zentao logout
+            await axios({
+                url: `${zentaoUrl}?m=user&amp;f=logout&amp;${sessionName}=${sessionID}`,
+                timeout: 3000
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        console.error("Zentao Error Issue Network fail");
     }
 }
 
@@ -181,11 +206,14 @@ function sign(data, secret = process.env.GOGS_SECRET) {
 function execCommand(command, options) {
     return new Promise((resolve, reject) => {
         exec(command, options, (error, stdout, stderr) => {
-            if (error) reject(error);
-            resolve({
-                stdout: stdout.toString(),
-                stderr: stderr.toString()
-            });
+            if (error) {
+                reject(error);
+            } else {
+                resolve({
+                    stdout: stdout.toString(),
+                    stderr: stderr.toString()
+                });
+            }
         });
     });
 }
@@ -207,13 +235,13 @@ module.exports = {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Qingful.html">Qingful</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createIssue">createIssue</a></li><li><a href="global.html#ding">ding</a></li><li><a href="global.html#execCommand">execCommand</a></li><li><a href="global.html#getBookshelf">getBookshelf</a></li><li><a href="global.html#sign">sign</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Qingful.html">Qingful</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createIssue">createIssue</a></li><li><a href="global.html#ding">ding</a></li><li><a href="global.html#execCommand">execCommand</a></li><li><a href="global.html#getBookshelf">getBookshelf</a></li><li><a href="global.html#sign">sign</a></li><li><a href="global.html#withRelateds">withRelateds</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Jun 25 2018 09:43:09 GMT+0800 (GMT+08:00)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Jul 30 2018 18:08:07 GMT+0800 (GMT+08:00)
 </footer>
 
 <script> prettyPrint(); </script>

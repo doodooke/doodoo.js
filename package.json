@@ -1,6 +1,6 @@
 {
   "name": "qingful",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Qingful web app framework",
   "main": "lib/qingful.js",
   "scripts": {
@@ -33,6 +33,8 @@
     "dotenv": "^5.0.1",
     "form-data": "^2.3.2",
     "glob": "^7.1.2",
+    "http-proxy": "^1.17.0",
+    "jsonwebtoken": "^8.3.0",
     "knex": "^0.14.6",
     "koa": "^2.5.1",
     "koa-body": "^2.5.0",

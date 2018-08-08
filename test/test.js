@@ -2,8 +2,8 @@ const test = require("ava");
 const assert = require("assert");
 const path = require("path");
 const supertest = require("supertest");
-const Qingful = require("./../lib/qingful");
-const app = new Qingful({
+const Doodoo = require("./../lib/doodoo");
+const app = new Doodoo({
     root: "./example/app"
 });
 
@@ -22,5 +22,5 @@ test(async t => {
     const res = await request.get("/test/index");
 
     t.is(200, res.status);
-    t.is(res.body.data, "Hello Qingful");
+    t.is(res.body.data, "Hello Doodoo");
 });

@@ -1,8 +1,8 @@
 {
-  "name": "qingful",
+  "name": "doodoo.js",
   "version": "1.0.1",
-  "description": "Qingful web app framework",
-  "main": "lib/qingful.js",
+  "description": "Doodoo web app framework",
+  "main": "lib/doodoo.js",
   "scripts": {
     "test": "nyc ava",
     "doc": "jsdoc -r --readme ./README.md -d docs ./lib",

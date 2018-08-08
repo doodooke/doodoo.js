@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: qingful.js</title>
+    <title>JSDoc: Source: doodoo.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: qingful.js</h1>
+    <h1 class="page-title">Source: doodoo.js</h1>
 
     
 
@@ -34,7 +34,7 @@ const moment = require("moment");
 const logger = require("koa-logger");
 const staticCache = require("koa-static-cache");
 const body = require("koa-body");
-const debug = require("debug")("qingful");
+const debug = require("debug")("doodoo");
 const dotenv = require("./dotenv/main");
 const Hook = require("./core/hook");
 const Model = require("./core/model");
@@ -58,14 +58,14 @@ dotenv.config({
 debug("process.env %O", process.env);
 
 // 全局加载
-global.qingful = _global;
+global.doodoo = _global;
 
 /**
- * Class Qingful
+ * Class doodoo
  */
-class Qingful extends Koa {
+class doodoo extends Koa {
     /**
-     * Create a qingful.
+     * Create a doodoo.
      * @param {object} options - Options
      * @param {string} options.root - App root path
      * @param {string} options.router - App router
@@ -74,7 +74,7 @@ class Qingful extends Koa {
         super(options);
 
         // 加载全局变量
-        qingful = Object.assign(this, _global);
+        doodoo = Object.assign(this, _global);
         Object.assign(this.context, _context);
 
         // this = new Koa();
@@ -93,7 +93,7 @@ class Qingful extends Koa {
 
             await next();
 
-            ctx.set("X-Powered-By", "qingful");
+            ctx.set("X-Powered-By", "doodoo");
             ctx.set("X-Response-Time", `${Date.now() - start}ms`);
         });
         this.use(logger());
@@ -102,7 +102,7 @@ class Qingful extends Koa {
                 await next();
             } catch (err) {
                 if (ctx.status !== 401) {
-                    qingful.notifyError(err, ctx);
+                    doodoo.notifyError(err, ctx);
                 }
                 ctx.fail(err.name + " : " + err.message);
             }
@@ -120,12 +120,12 @@ class Qingful extends Koa {
             this.bookshelf = model.bookshelf;
             this.models = model.loadModels();
             this.model = model => {
-                if (qingful.models[model]) {
-                    return qingful.models[model];
+                if (doodoo.models[model]) {
+                    return doodoo.models[model];
                 } else {
-                    return (qingful.models[
+                    return (doodoo.models[
                         model
-                    ] = qingful.bookshelf.Model.extend({
+                    ] = doodoo.bookshelf.Model.extend({
                         tableName: model,
                         hasTimestamps: true
                     }));
@@ -219,44 +219,42 @@ class Qingful extends Koa {
         );
 
         // context
-        Object.assign(this.context, qingful);
+        Object.assign(this.context, doodoo);
 
         return (this.server = this.listen(process.env.APP_PORT, this.started));
     }
 
     async started() {
         // 执行钩子
-        await qingful.hook.run("started");
+        await doodoo.hook.run("started");
 
-        console.log(`[qingful] Version: ${pkg.version}`);
-        console.log(`[qingful] Website: ${process.env.APP_HOST}`);
-        console.log(`[qingful] Nodejs Version: ${process.version}`);
+        console.log(`[doodoo] Version: ${pkg.version}`);
+        console.log(`[doodoo] Website: ${process.env.APP_HOST}`);
+        console.log(`[doodoo] Nodejs Version: ${process.version}`);
         console.log(
-            `[qingful] Nodejs Platform: ${process.platform} ${process.arch}`
+            `[doodoo] Nodejs Platform: ${process.platform} ${process.arch}`
         );
         console.log(
-            `[qingful] Server Enviroment: ${process.env.NODE_ENV ||
+            `[doodoo] Server Enviroment: ${process.env.NODE_ENV ||
                 "development"}`
         );
         console.log(
-            `[qingful] Server Startup Time: ${moment().diff(
-                qingful.start_at
-            )}ms`
+            `[doodoo] Server Startup Time: ${moment().diff(doodoo.start_at)}ms`
         );
         console.log(
-            `[qingful] Server Current Time: ${moment().format(
+            `[doodoo] Server Current Time: ${moment().format(
                 "YYYY-MM-DD HH:mm:ss"
             )}`
         );
         console.log(
-            `[qingful] Server Running At: http://127.0.0.1:${
+            `[doodoo] Server Running At: http://127.0.0.1:${
                 process.env.APP_PORT
             }`
         );
     }
 }
 
-module.exports = Qingful;
+module.exports = doodoo;
 </code></pre>
         </article>
     </section>
@@ -267,13 +265,13 @@ module.exports = Qingful;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Qingful.html">Qingful</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createIssue">createIssue</a></li><li><a href="global.html#ding">ding</a></li><li><a href="global.html#execCommand">execCommand</a></li><li><a href="global.html#getBookshelf">getBookshelf</a></li><li><a href="global.html#sign">sign</a></li><li><a href="global.html#withRelateds">withRelateds</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="doodoo.html">doodoo</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createIssue">createIssue</a></li><li><a href="global.html#ding">ding</a></li><li><a href="global.html#execCommand">execCommand</a></li><li><a href="global.html#getBookshelf">getBookshelf</a></li><li><a href="global.html#sign">sign</a></li><li><a href="global.html#withRelateds">withRelateds</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Aug 01 2018 11:24:43 GMT+0800 (GMT+08:00)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Aug 08 2018 15:43:45 GMT+0800 (GMT+08:00)
 </footer>
 
 <script> prettyPrint(); </script>

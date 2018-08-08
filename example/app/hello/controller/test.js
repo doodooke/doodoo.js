@@ -1,4 +1,4 @@
-module.exports = class extends qingful.Controller {
+module.exports = class extends doodoo.Controller {
     async _initialize() {
         // 控制器初始化
         console.log("_initialize");
@@ -22,7 +22,7 @@ module.exports = class extends qingful.Controller {
      */
     async index() {
         console.log("index");
-        this.success("Hello Qingful");
+        this.success("Hello Doodoo.js");
     }
 
     async _after_index() {

@@ -1,4 +1,4 @@
-const Qingful = require("./../lib/qingful");
+const Doodoo = require("./../lib/doodoo");
 
-const app = new Qingful();
+const app = new Doodoo();
 app.start();

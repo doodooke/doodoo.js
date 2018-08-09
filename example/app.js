@@ -1,5 +1,5 @@
-const Doodoo = require("./../lib/doodoo");
+const Doodoo = require("./../lib/application");
 
 const app = new Doodoo();
-app.plugin("");
+app.plugin("dingding");
 app.start();

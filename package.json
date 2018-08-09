@@ -2,7 +2,7 @@
   "name": "doodoo.js",
   "version": "1.0.1",
   "description": "Doodoo web app framework",
-  "main": "lib/doodoo.js",
+  "main": "lib/application.js",
   "scripts": {
     "test": "nyc ava",
     "doc": "jsdoc -r --readme ./README.md -d docs ./lib",

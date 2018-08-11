@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: global.js</title>
+    <title>JSDoc: Source: plugin/dingding/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: global.js</h1>
+    <h1 class="page-title">Source: plugin/dingding/index.js</h1>
 
     
 
@@ -26,33 +26,38 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const _knex = require("knex");
-const _bookshelf = require("bookshelf");
-const uuid = require("bookshelf-uuid");
-const paranoia = require("bookshelf-paranoia");
-const model = require("./bookshelf/model");
-const pagination = require("./bookshelf/pagination");
+            <pre class="prettyprint source linenums"><code>const axios = require("axios");
+const moment = require("moment");
 
 /**
- * Get bookshelf
- * @param {object} connection - The connection of mysql
- * @returns bookshelf
+ * Uage
+ * app.plugin("dingding", {url: "xxx"});
  */
-function getBookshelf(connection) {
-    const knex = _knex(connection);
-    const bookshelf = _bookshelf(knex);
 
-    bookshelf.plugin("visibility");
-    bookshelf.plugin(pagination);
-    bookshelf.plugin(paranoia);
-    bookshelf.plugin(uuid);
-    bookshelf.plugin(model);
-
-    return bookshelf;
-}
-
-module.exports = {
-    getBookshelf
+module.exports = options => {
+    doodoo.hook.add("dingding", async (title, text) => {
+        try {
+            await axios({
+                url: options.url,
+                method: "post",
+                timeout: 3000,
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                data: {
+                    msgtype: "markdown",
+                    markdown: {
+                        title: title,
+                        text: `#### ${title} ####\n${text}\n#### 时间：${moment().format(
+                            "YYYY-MM-DD HH:mm:ss"
+                        )} ####`
+                    }
+                }
+            });
+        } catch (error) {
+            console.error("Ding Network fail");
+        }
+    });
 };
 </code></pre>
         </article>

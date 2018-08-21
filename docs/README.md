@@ -409,7 +409,7 @@ Doodoo.js默认使用了自动加载路由，类似于thinkphp的开发方式。
 
 #### 多级控制器
 
-Doodoo.js支持多级控制器，例如访问的路径是 `/demo/home/shop/product/index`，demo会解析成模块，shop/product会解析成控制器，index解析成方法，此时会加载 `app/controller/home/shop/product.js` 下的index方法。
+Doodoo.js支持多级控制器，例如访问的路径是 `/demo/home/shop/product/index`，demo会解析成模块，home/shop/product会解析成控制器，index解析成方法，此时会加载 `app/controller/home/shop/product.js` 下的index方法。
 
 ### 钩子
 

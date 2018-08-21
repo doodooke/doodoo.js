@@ -46,9 +46,10 @@ module.exports = class extends base {
 * 支持断点调试 ES6+ 项目
 * 支持多种项目结构和多种项目环境
 * 支持 Route, Controller 中使用Koa.js的所有API
-* 支持模块化开发
 * 支持多级 Controller
+* 支持模块化开发
 * 支持钩子机制
+* 支持插件机制
 * 支持错误处理
 * 支持全局doodoo变量
 * 支持Bookshelf, knex链接数据库

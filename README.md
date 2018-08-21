@@ -51,9 +51,11 @@ module.exports = class extends base {
 * 支持钩子机制
 * 支持错误处理
 * 支持全局doodoo变量
+* 支持Bookshelf, knex链接数据库
 * 支持前置，后置操作
 * 支持 Restful 设计
 * 支持启动自定义
+* 支持环境加载配置
 * ...
 
 ## 安装
@@ -95,7 +97,7 @@ this.error(errmsg = "error", errcode = 1);
 ```
 
 ## 配置
-```javascript
+```text
 # 应用配置
 APP_ROOT=app
 APP_PORT=3000

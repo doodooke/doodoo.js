@@ -330,7 +330,7 @@ Doodoo.js 创建项目时支持多种项目模式，默认创建的项目是按�
 
 #### 定义控制器
 
-创建文件 `app/demo/controller/home/index.js`，表示 `home` 模块下有名为 `index` 控制器，文件内容类似如下：
+创建文件 `app/demo/controller/home/index.js`，表示 `demo` 模块下有名为 `home/index` 控制器，文件内容类似如下：
 
 ```javascript
 module.exports = class extends doodoo.Controller {

@@ -366,7 +366,7 @@ this.error(errmsg = "error", errcode = 1);
 #### 默认配置
 
 
-```javascript
+```Text
 # .env文件
 # 应用配置
 APP_ROOT=app

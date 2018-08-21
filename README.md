@@ -165,7 +165,7 @@ node app.js
 
 
 ## 使用手册
-[DooDoo.js使用手册](https://github.com/doodooke/doodoo.js/tree/master/docs/README.md)
+[Doodoo.js使用手册](https://github.com/doodooke/doodoo.js/tree/master/docs/README.md)
 
 ## 官网
-[DooDooKe小程序](http://www.doodooke.com)
+[多多客Doodooke小程序](http://www.doodooke.com)

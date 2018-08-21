@@ -4,7 +4,7 @@
 [![travis-ci](https://img.shields.io/travis/koahubjs/koahub.svg?style=flat-square)](https://travis-ci.org/koahubjs/koahub)
 [![Dependency Status](https://img.shields.io/david/doodooke/doodoo.js.svg?style=flat-square)](https://david-dm.org/doodooke/doodoo.js)
 
-Doodoo.js -- 中文最佳实践Node.js Web快速开发框架。支持Koa.js, Express.js中间件。
+Doodoo.js -- 中文最佳实践Node.js Web快速开发框架。支持Koa.js中间件。
 
 ```javascript
 //base controller, app/demo/controller/base.js
@@ -41,7 +41,7 @@ module.exports = class extends base {
 
 ## 特性
 
-* 支持koa, express中间件
+* 支持koa全部中间件
 * 支持使用 ES6+ 全部特性来开发项目
 * 支持断点调试 ES6+ 项目
 * 支持多种项目结构和多种项目环境

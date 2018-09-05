@@ -169,7 +169,12 @@ node app.js
 
 ## 问题反馈
 在使用中有任何问题，请使用以下联系方式联系我们
+
 QQ群: 874449168(交流群①)
+
+EMAIL: 786699892@qq.com
+
+Github: https://github.com/doodooke/doodoo.js
 
 ## 官网
 [多多客Doodooke小程序](http://www.doodooke.com)

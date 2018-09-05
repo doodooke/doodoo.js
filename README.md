@@ -167,5 +167,9 @@ node app.js
 ## 使用手册
 [Doodoo.js使用手册](https://github.com/doodooke/doodoo.js/tree/master/docs/README.md)
 
+## 问题反馈
+在使用中有任何问题，请使用以下联系方式联系我们
+QQ群: 874449168(交流群①)
+
 ## 官网
 [多多客Doodooke小程序](http://www.doodooke.com)

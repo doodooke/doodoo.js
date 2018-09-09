@@ -4,7 +4,7 @@
 
 #### 简介
 
-​	Doodoo.js -- 中文最佳实践Node.js Web快速开发框架。支持Koa.js中间件，支持模块化，插件，钩子机制，可以直接在项目里使用 ES6/7（Generator Function, Class, Async & Await）等特性。同时吸收了thinkphp，laravel等国内外众多框架的设计理念和思想，让开发 Node.js 项目更加简单、高效、灵活。
+​	Doodoo.js -- 中文最佳实践Node.js Web快速开发框架。支持Koa.js, Express.js中间件，支持模块化，插件，钩子机制，可以直接在项目里使用 ES6/7（Generator Function, Class, Async & Await）等特性。同时吸收了thinkphp，laravel等国内外众多框架的设计理念和思想，让开发 Node.js 项目更加简单、高效、灵活。
 
 ​	使用 ES6/7 特性来开发项目可以大大提高开发效率，是趋势所在。并且新版的 Node.js 对 ES6 特性也有了较好的支持，即使有些特性还没有支持，也可以借助 [Babel](http://babeljs.io/) 编译来支持。
 

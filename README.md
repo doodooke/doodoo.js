@@ -51,8 +51,8 @@ module.exports = class extends base {
 * 支持钩子机制
 * 支持插件机制
 * 支持错误处理
-* 支持全局doodoo变量
-* 支持Bookshelf, knex链接数据库
+* 支持全局 doodoo 变量
+* 支持 mysql, mongodb 数据库
 * 支持前置，后置操作
 * 支持 Restful 设计
 * 支持启动自定义
@@ -113,6 +113,10 @@ MYSQL_DATABASE=doodoo
 MYSQL_PORT=3306
 MYSQL_CHARSET=utf8mb4
 
+# MONGODB数据库链接
+MONGOOSE=false
+MONGOOSE_URI=mongodb://127.0.0.1:27017/doodoo
+
 # REDIS链接
 REDIS=false
 REDIS_HOST=127.0.0.1
@@ -153,7 +157,7 @@ node app.js
 ## 启动信息
 
 ```text
-[doodoo] Version: 1.0.1
+[doodoo] Version: 1.0.3
 [doodoo] Website: 127.0.0.1
 [doodoo] Nodejs Version: v10.5.0
 [doodoo] Nodejs Platform: darwin x64

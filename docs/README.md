@@ -20,8 +20,8 @@
 * 支持钩子机制
 * 支持插件机制
 * 支持错误处理
-* 支持全局doodoo变量
-* 支持Bookshelf, knex链接数据库
+* 支持全局 doodoo 变量
+* 支持 mysql, mongodb 数据库
 * 支持前置，后置操作
 * 支持 Restful 设计
 * 支持启动自定义
@@ -78,7 +78,7 @@ module.exports = class extends base {
 ##### 服务 启动日志
 
 ```
-[doodoo] Version: 1.0.1
+[doodoo] Version: 1.0.3
 [doodoo] Website: 127.0.0.1
 [doodoo] Nodejs Version: v10.5.0
 [doodoo] Nodejs Platform: darwin x64

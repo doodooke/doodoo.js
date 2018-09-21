@@ -1,6 +1,6 @@
 {
   "name": "doodoo.js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Doodoo web app framework",
   "main": "lib/application.js",
   "scripts": {
@@ -42,6 +42,7 @@
     "koa-static-cache": "^5.1.2",
     "lodash": "^4.17.10",
     "moment": "^2.22.1",
+    "mongoose": "^5.2.16",
     "mysql": "^2.15.0",
     "nyc": "^11.7.3",
     "redis": "^2.8.0",

@@ -78,9 +78,9 @@ module.exports = class extends base {
 ##### 服务 启动日志
 
 ```
-[doodoo] Version: 1.1.0
+[doodoo] Version: 1.1.1
 [doodoo] Website: 127.0.0.1
-[doodoo] Nodejs Version: v10.5.0
+[doodoo] Nodejs Version: v8.12.0
 [doodoo] Nodejs Platform: darwin x64
 [doodoo] Server Enviroment: development
 [doodoo] Server Startup Time: 212ms
@@ -135,7 +135,7 @@ node app.js
 ```
 [doodoo] Version: 1.0.1
 [doodoo] Website: 127.0.0.1
-[doodoo] Nodejs Version: v10.5.0
+[doodoo] Nodejs Version: v8.12.0
 [doodoo] Nodejs Platform: darwin x64
 [doodoo] Server Enviroment: development
 [doodoo] Server Startup Time: 212ms

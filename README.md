@@ -157,7 +157,7 @@ node app.js
 ## 启动信息
 
 ```text
-[doodoo] Version: 2.0.0
+[doodoo] Version: 1.1.1
 [doodoo] Website: 127.0.0.1
 [doodoo] Nodejs Version: v8.12.0
 [doodoo] Nodejs Platform: darwin x64

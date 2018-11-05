@@ -1,0 +1,42 @@
+{
+  "name": "doodoo.js",
+  "version": "2.0.0",
+  "description": "Doodoo web app framework",
+  "main": "lib/application.js",
+  "scripts": {
+    "test": "ava test/*.test.js",
+    "ci": "nyc npm run test",
+    "report": "nyc report --reporter=html",
+    "doc": "jsdoc -r --readme ./README.md -d docs ./lib"
+  },
+  "keywords": [
+    "web",
+    "app",
+    "http",
+    "application",
+    "framework",
+    "koa"
+  ],
+  "author": "heqing",
+  "license": "MIT",
+  "dependencies": {
+    "dayjs": "^1.7.7",
+    "debug": "^3.1.0",
+    "dotenv": "^5.0.1",
+    "glob": "^7.1.2",
+    "koa": "^2.5.1",
+    "koa-body": "^2.5.0",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "koa-static-cache": "^5.1.2",
+    "lodash": "^4.17.10",
+    "prompts": "^1.2.0",
+    "shelljs": "^0.8.2"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "jsdoc": "^3.5.5",
+    "nyc": "^13.1.0",
+    "supertest": "^3.0.0"
+  }
+}

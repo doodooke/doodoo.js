@@ -1,62 +1,20 @@
 {
-  "name": "doodoo.js",
-  "version": "1.1.1",
-  "description": "Doodoo web app framework",
-  "main": "lib/application.js",
+  "name": "doodoo",
+  "private": true,
   "scripts": {
-    "test": "nyc ava",
-    "doc": "jsdoc -r --readme ./README.md -d docs ./lib",
-    "eslint": "eslint ./lib",
-    "eslint-fix": "eslint --fix ./lib"
+    "eslint": "eslint ./packages",
+    "eslint-fix": "eslint --fix ./packages"
   },
   "pre-commit": [
     "eslint"
   ],
-  "keywords": [
-    "web",
-    "app",
-    "http",
-    "application",
-    "framework",
-    "koa"
-  ],
-  "author": "heqing",
-  "license": "MIT",
-  "dependencies": {
-    "axios": "^0.18.0",
-    "bluebird": "^3.5.1",
-    "bookshelf": "^0.13.3",
-    "bookshelf-paranoia": "^0.11.0",
-    "bookshelf-uuid": "^1.0.0",
-    "crypto": "^1.0.1",
-    "debug": "^3.1.0",
-    "dotenv": "^5.0.1",
-    "glob": "^7.1.2",
-    "http-proxy": "^1.17.0",
-    "jsonwebtoken": "^8.3.0",
-    "knex": "^0.14.6",
-    "koa": "^2.5.1",
-    "koa-body": "^2.5.0",
-    "koa-logger": "^3.2.0",
-    "koa-router": "^7.4.0",
-    "koa-static-cache": "^5.1.2",
-    "lodash": "^4.17.10",
-    "moment": "^2.22.1",
-    "mongoose": "^5.2.16",
-    "mysql": "^2.15.0",
-    "nyc": "^11.7.3",
-    "redis": "^2.8.0",
-    "type-is": "^1.6.16",
-    "yn": "^2.0.0"
-  },
   "devDependencies": {
-    "ava": "^0.25.0",
-    "eslint": "^4.19.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-prettier": "^2.6.0",
-    "jsdoc": "^3.5.5",
+    "eslint": "^5.8.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "lerna": "^3.4.3",
     "pre-commit": "^1.2.2",
-    "prettier": "^1.12.1",
-    "supertest": "^3.0.0"
-  }
+    "prettier": "^1.14.3"
+  },
+  "dependencies": {}
 }

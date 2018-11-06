@@ -1,11 +1,70 @@
-const { Nuxt, Builder } = require("nuxt");
+const { Nuxt, Builder, Utils } = require("nuxt");
+const glob = require("glob");
 const yn = require("yn");
 const path = require("path");
 const isDev = (process.env.NODE_ENV || "development") === "development";
+const appDir = process.env.APP_ROOT;
+
+function createRoutes(srcDir) {
+    const views = glob.sync("*/view/**/*.vue", {
+        cwd: appDir
+    });
+
+    const routes = [];
+    for (const key in views) {
+        const file = path.resolve(appDir, views[key]);
+        routes.push({
+            name: views[key],
+            path:
+                "/" +
+                views[key]
+                    .replace(/\\/g, "/")
+                    .replace(/\/view/, "")
+                    .replace(/_/g, ":")
+                    .replace(/.vue$/, "")
+                    .replace(/.index$/, ""),
+            component: file,
+            chunkName: "pages/app/" + views[key]
+        });
+    }
+    return routes;
+}
+
+function createLayouts() {
+    const layouts = glob.sync("*/layout/**/*.vue", { cwd: appDir });
+    const _layouts = {};
+    for (const key in layouts) {
+        _layouts[
+            path
+                .basename(layouts[key])
+                .replace(/\\/g, "/")
+                .replace(/.vue$/, "")
+        ] = Utils.relativeTo(
+            path.resolve(".nuxt"),
+            path.resolve(appDir, layouts[key])
+        );
+    }
+
+    return _layouts;
+}
 
 // 用指定的配置对象实例化 Nuxt.js
 const config = require(path.resolve("./nuxt.config"));
-const nuxt = new Nuxt(Object.assign(config, { dev: isDev }));
+const nuxt = new Nuxt(
+    Object.assign(
+        {
+            srcDir: "web",
+            layouts: createLayouts(),
+            build: {
+                createRoutes: srcDir => {
+                    return createRoutes(srcDir);
+                }
+            }
+        },
+        config,
+        { dev: isDev }
+    )
+);
 
 module.exports = async () => {
     // 在开发模式下启用编译构建和热加载

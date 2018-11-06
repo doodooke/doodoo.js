@@ -2,6 +2,7 @@ const { Nuxt, Builder, Utils } = require("nuxt");
 const glob = require("glob");
 const yn = require("yn");
 const path = require("path");
+const _ = require("lodash");
 const isDev = (process.env.NODE_ENV || "development") === "development";
 const appDir = process.env.APP_ROOT;
 
@@ -51,7 +52,7 @@ function createLayouts() {
 // 用指定的配置对象实例化 Nuxt.js
 const config = require(path.resolve("./nuxt.config"));
 const nuxt = new Nuxt(
-    Object.assign(
+    _.merge(
         {
             srcDir: "web",
             layouts: createLayouts(),

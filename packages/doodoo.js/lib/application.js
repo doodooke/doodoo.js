@@ -78,15 +78,25 @@ module.exports = class Application extends Koa {
     }
 
     /**
-     * Use a plugin
-     * @description The plugin to add. If you provide a string it can
-     *    represent a built-in plugin. You can also pass a function as argument to add it as a
-     *    plugin.
+     * Plugin as middleware
+     * @param {*} plugin
+     * @param {*} options
      */
-    async plugin(plugin, options) {
+    plugin(plugin, options) {
+        const pluginFn = async () => {
+            return await this.usePlugin(plugin, options);
+        };
+        this.use(pluginFn);
+    }
+
+    /**
+     * Use a plugin
+     * @param {*} plugin
+     * @param {*} options
+     */
+    async usePlugin(plugin, options) {
         if (_.isString(plugin)) {
             let required;
-
             try {
                 required = require("./plugin/" + plugin);
             } catch (e) {
@@ -100,13 +110,13 @@ module.exports = class Application extends Koa {
                 await required(options);
             }
         }
-
         if (_.isFunction(plugin)) {
             await plugin(options);
         }
-
         if (_.isArray(plugin)) {
-            plugin.forEach(async p => await this.plugin(p, options));
+            for (const key in plugin) {
+                await this.usePlugin(plugin[key], options);
+            }
         }
     }
 
@@ -114,7 +124,7 @@ module.exports = class Application extends Koa {
      * Use express middleware
      * @param {*} fn
      */
-    async useExpress(fn) {
+    useExpress(fn) {
         this.use(_global.expressMiddlewareToKoaMiddleware(fn));
     }
 
@@ -122,7 +132,7 @@ module.exports = class Application extends Koa {
      * Use a body middleware
      * @description The middleware is finally loaded by default, which can be manually invoked.
      */
-    async body() {
+    body() {
         // step 2
         this.useBody = true;
         this.use(async (ctx, next) => {
@@ -143,7 +153,7 @@ module.exports = class Application extends Koa {
      * Use a route middleware
      * @description The middleware automatically loads routes
      */
-    async route() {
+    route() {
         // step 3
         this.useRoute = true;
 
@@ -161,6 +171,15 @@ module.exports = class Application extends Koa {
      */
     async start() {
         // step 4
+        for (const key in this.middleware) {
+            if (this.middleware[key].name === "pluginFn") {
+                const _fn = this.middleware[key];
+                this.middleware.splice(key, 1);
+                await _fn();
+            }
+        }
+
+        // step 5
         if (!this.useBody) {
             await this.body();
         }

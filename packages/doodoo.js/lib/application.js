@@ -140,12 +140,14 @@ module.exports = class Application extends Koa {
      */
     async start() {
         // step 4
-        const middleware = [].concat(this.middleware);
-        for (const key in middleware) {
-            if (middleware[key].name === "pluginFn") {
-                this.middleware.splice(key, 1);
-                const _fn = middleware[key];
+        const _middleware = this.middleware;
+        this.middleware = [];
+        for (const key in _middleware) {
+            if (_middleware[key].name === "pluginFn") {
+                const _fn = _middleware[key];
                 await _fn();
+            } else {
+                this.middleware.push(_middleware[key]);
             }
         }
 

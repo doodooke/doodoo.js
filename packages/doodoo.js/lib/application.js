@@ -84,40 +84,9 @@ module.exports = class Application extends Koa {
      */
     plugin(plugin, options) {
         const pluginFn = async () => {
-            return await this.usePlugin(plugin, options);
+            await _global.usePlugin(plugin, options);
         };
         this.use(pluginFn);
-    }
-
-    /**
-     * Use a plugin
-     * @param {*} plugin
-     * @param {*} options
-     */
-    async usePlugin(plugin, options) {
-        if (_.isString(plugin)) {
-            let required;
-            try {
-                required = require("./plugin/" + plugin);
-            } catch (e) {
-                try {
-                    required = require(path.resolve("./plugin/" + plugin));
-                } catch (e) {
-                    required = await _global.requirePlugin(plugin);
-                }
-            }
-            if (_.isFunction(required)) {
-                await required(options);
-            }
-        }
-        if (_.isFunction(plugin)) {
-            await plugin(options);
-        }
-        if (_.isArray(plugin)) {
-            for (const key in plugin) {
-                await this.usePlugin(plugin[key], options);
-            }
-        }
     }
 
     /**
@@ -171,10 +140,11 @@ module.exports = class Application extends Koa {
      */
     async start() {
         // step 4
-        for (const key in this.middleware) {
-            if (this.middleware[key].name === "pluginFn") {
-                const _fn = this.middleware[key];
+        const middleware = [].concat(this.middleware);
+        for (const key in middleware) {
+            if (middleware[key].name === "pluginFn") {
                 this.middleware.splice(key, 1);
+                const _fn = middleware[key];
                 await _fn();
             }
         }

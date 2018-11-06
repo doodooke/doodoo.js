@@ -55,11 +55,17 @@ module.exports = (options = {}) => {
             client: "mysql",
             connection: connection
         });
-    }
 
-    doodoo.models = loadModels("*/model/**/*.{js,js7}");
-    doodoo.model = model => {
-        return doodoo.models[model];
-    };
-    debug("models %O", this.models);
+        const models = loadModels("*/model/**/*.{js,js7}");
+        if (doodoo.models) {
+            Object.assign(doodoo.models, models);
+        } else {
+            doodoo.models = models;
+        }
+
+        doodoo.model = model => {
+            return doodoo.models[model];
+        };
+        debug("models %O", this.models);
+    }
 };

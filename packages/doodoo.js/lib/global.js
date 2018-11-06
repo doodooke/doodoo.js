@@ -1,6 +1,46 @@
 const prompts = require("prompts");
 const shell = require("shelljs");
+const path = require("path");
+const _ = require("lodash");
 
+/**
+ * Use a plugin
+ * @param {*} plugin
+ * @param {*} options
+ */
+async function usePlugin(plugin, options) {
+    if (_.isString(plugin)) {
+        let required;
+        try {
+            required = require("./plugin/" + plugin);
+        } catch (e) {
+            if (e.code !== "MODULE_NOT_FOUND") {
+                throw e;
+            }
+
+            try {
+                required = require(path.resolve("./plugin/" + plugin));
+            } catch (e) {
+                if (e.code !== "MODULE_NOT_FOUND") {
+                    throw e;
+                }
+
+                required = await requirePlugin(plugin);
+            }
+        }
+        if (_.isFunction(required)) {
+            await required(options);
+        }
+    }
+    if (_.isFunction(plugin)) {
+        await plugin(options);
+    }
+    if (_.isArray(plugin)) {
+        for (const key in plugin) {
+            await usePlugin(plugin[key], options);
+        }
+    }
+}
 /**
  * require plugin
  * @param {*} name
@@ -79,6 +119,7 @@ function getEnv(name) {
 
 module.exports = {
     getEnv,
+    usePlugin,
     requirePlugin,
     expressMiddlewareToKoaMiddleware
 };

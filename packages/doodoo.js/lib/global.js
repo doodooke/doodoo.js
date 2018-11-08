@@ -48,7 +48,7 @@ async function usePlugin(plugin, options) {
 async function requirePlugin(name, options = {}) {
     options = Object.assign(
         {
-            prefix: "@doodoo/"
+            prefix: "doodoo-plugin-"
         },
         options
     );

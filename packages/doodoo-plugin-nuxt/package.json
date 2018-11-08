@@ -1,5 +1,5 @@
 {
-  "name": "@doodoo/nuxt",
+  "name": "doodoo-plugin-nuxt",
   "version": "0.0.2",
   "description": "doodoo plugin nuxt",
   "keywords": [

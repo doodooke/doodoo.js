@@ -1,5 +1,5 @@
 {
-  "name": "@doodoo/redis",
+  "name": "doodoo-plugin-redis",
   "version": "0.0.2",
   "description": "doodoo plugin redis",
   "keywords": [

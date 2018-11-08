@@ -1,5 +1,5 @@
 {
-  "name": "@doodoo/mongoose",
+  "name": "doodoo-plugin-mongoose",
   "version": "0.0.2",
   "description": "doodoo plugin mongoose",
   "keywords": [

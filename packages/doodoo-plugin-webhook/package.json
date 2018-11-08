@@ -1,5 +1,5 @@
 {
-  "name": "@doodoo/webhook",
+  "name": "doodoo-plugin-webhook",
   "version": "0.0.2",
   "description": "doodoo plugin webhook",
   "keywords": [

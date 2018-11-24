@@ -6,12 +6,6 @@
   "homepage": "https://github.com/doodooke/doodoo.js#readme",
   "license": "MIT",
   "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
-  "files": [
-    "lib"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/doodooke/doodoo.js.git"

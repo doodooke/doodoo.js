@@ -21,7 +21,7 @@ function isClass(input) {
 
 module.exports = class Router {
     constructor(options = {}) {
-        this.root = process.env.APP_ROOT;
+        this.root = doodoo.getConf("app.root");
         this.router = options.router || new KoaRouter();
 
         assert(this.router instanceof KoaRouter);

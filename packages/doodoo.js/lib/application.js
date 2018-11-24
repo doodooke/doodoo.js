@@ -6,7 +6,6 @@ const logger = require("koa-logger");
 const KoaRouter = require("koa-router");
 const body = require("koa-body");
 const debug = require("debug")("doodoo");
-const dotenv = require("./dotenv/main");
 const Hook = require("./core/hook");
 const Router = require("./core/router");
 const _global = require("./global");
@@ -15,19 +14,21 @@ const Controller = require("./core/controller");
 const { notifyError } = require("./core/error");
 const pkg = require("./../package.json");
 
-// 加载配置
-dotenv.config({
-    path: path.resolve(__dirname, "..", ".env")
-});
-dotenv.config();
-dotenv.config({
-    path: `${process.env.NODE_ENV}.env`
-});
-
-debug("process.env %O", process.env);
-
 // 全局加载
 global.doodoo = _global;
+
+// 加载配置
+doodoo.config = doodoo.yamlLoad(path.resolve(__dirname, "..", "config.yaml"));
+Object.assign(
+    doodoo.config,
+    doodoo.yamlLoad("config.yaml"),
+    doodoo.yamlLoad(`${process.env.NODE_ENV}.config.yaml`)
+);
+doodoo.getConf = path => {
+    return _.get(doodoo.config, path);
+};
+
+debug("doodoo.config %O", doodoo.config);
 
 /**
  * Class Application
@@ -43,7 +44,7 @@ module.exports = class Application extends Koa {
         super(options);
 
         // 加载全局变量
-        doodoo = Object.assign(this, _global);
+        doodoo = Object.assign(this, doodoo);
         Object.assign(this.context, _context);
 
         // this = new Koa();
@@ -63,7 +64,7 @@ module.exports = class Application extends Koa {
         // router
         this.Controller = Controller;
         this.router = this.options.router || new KoaRouter();
-        this.router.prefix(this.options.prefix || process.env.APP_PREFIX);
+        this.router.prefix(this.options.prefix || doodoo.getConf("app.prefix"));
 
         // step 1
         this.use(async (ctx, next) => {
@@ -162,7 +163,10 @@ module.exports = class Application extends Koa {
         // context
         Object.assign(this.context, doodoo);
 
-        return (this.server = this.listen(process.env.APP_PORT, this.started));
+        return (this.server = this.listen(
+            doodoo.getConf("app.port"),
+            this.started
+        ));
     }
 
     async started() {
@@ -170,7 +174,7 @@ module.exports = class Application extends Koa {
         await doodoo.hook.run("started");
 
         console.log(`[doodoo] Version: ${pkg.version}`);
-        console.log(`[doodoo] Website: ${process.env.APP_HOST}`);
+        console.log(`[doodoo] Website: ${doodoo.getConf("app.host")}`);
         console.log(`[doodoo] Nodejs Version: ${process.version}`);
         console.log(
             `[doodoo] Nodejs Platform: ${process.platform} ${process.arch}`
@@ -188,9 +192,9 @@ module.exports = class Application extends Koa {
             )}`
         );
         console.log(
-            `[doodoo] Server Running At: http://127.0.0.1:${
-                process.env.APP_PORT
-            }`
+            `[doodoo] Server Running At: http://127.0.0.1:${doodoo.getConf(
+                "app.port"
+            )}`
         );
     }
 };

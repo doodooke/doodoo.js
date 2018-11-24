@@ -3,7 +3,7 @@ const path = require("path");
 
 module.exports = class Hook {
     constructor() {
-        this.root = process.env.APP_ROOT;
+        this.root = doodoo.getConf("app.root");
         this.hooks = {};
         this.loadHooks();
     }

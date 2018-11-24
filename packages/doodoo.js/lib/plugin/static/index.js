@@ -1,9 +1,9 @@
 const staticCache = require("koa-static-cache");
 
 module.exports = (options = {}) => {
-    const dir = options.dir || process.env.STATIC_DIR;
-    const maxAge = options.maxAge || process.env.STATIC_MAXAGE;
-    const dynamic = options.dynamic || process.env.STATIC_DYNAMIC;
+    const dir = options.dir || doodoo.getConf("static.dir");
+    const maxAge = options.maxAge || doodoo.getConf("static.maxAge");
+    const dynamic = options.dynamic || doodoo.getConf("static.dynamic");
 
     doodoo.use(
         staticCache(

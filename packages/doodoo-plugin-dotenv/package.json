@@ -1,0 +1,28 @@
+{
+  "name": "doodoo-plugin-dotenv",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "heqing <786699892@qq.com>",
+  "homepage": "https://github.com/doodooke/doodoo.js#readme",
+  "license": "MIT",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doodooke/doodoo.js.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/doodooke/doodoo.js/issues"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
+}

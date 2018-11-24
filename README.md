@@ -98,7 +98,7 @@ this.error(errmsg = "error", errcode = 1);
 ```
 
 ## 配置
-```text
+```yaml
 # 应用配置
 app:
   root: app

@@ -1,14 +1,11 @@
 {
-  "name": "doodoo-plugin-redis",
-  "version": "1.0.1-alpha.0",
-  "description": "doodoo plugin redis",
-  "keywords": [
-    "doodoo"
-  ],
+  "name": "doodoo-plugin-dotenv",
+  "version": "1.0.0",
+  "description": "> TODO: description",
   "author": "heqing <786699892@qq.com>",
   "homepage": "https://github.com/doodooke/doodoo.js#readme",
   "license": "MIT",
-  "main": "lib/index.js",
+  "main": "index.js",
   "directories": {
     "lib": "lib"
   },
@@ -26,8 +23,6 @@
     "url": "https://github.com/doodooke/doodoo.js/issues"
   },
   "dependencies": {
-    "bluebird": "^3.5.2",
-    "redis": "^2.8.0",
-    "yn": "^2.0.0"
+    "lodash": "^4.17.11"
   }
 }

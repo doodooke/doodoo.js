@@ -1,6 +1,8 @@
 const prompts = require("prompts");
 const shell = require("shelljs");
 const path = require("path");
+const fs = require("fs");
+const yaml = require("js-yaml");
 const _ = require("lodash");
 
 /**
@@ -110,15 +112,17 @@ function expressMiddlewareToKoaMiddleware(fn) {
 }
 
 /**
- * get env
- * @param {*} name
+ * load yaml file
+ * @param {*} file
  */
-function getEnv(name) {
-    return process.env[name];
+function yamlLoad(file) {
+    if (fs.existsSync(file)) {
+        return yaml.safeLoad(fs.readFileSync(file, "utf8"));
+    }
 }
 
 module.exports = {
-    getEnv,
+    yamlLoad,
     usePlugin,
     requirePlugin,
     expressMiddlewareToKoaMiddleware

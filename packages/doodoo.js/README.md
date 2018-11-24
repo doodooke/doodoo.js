@@ -100,33 +100,17 @@ this.error(errmsg = "error", errcode = 1);
 ## 配置
 ```text
 # 应用配置
-APP_ROOT=app
-APP_PORT=3000
-APP_HOST=127.0.0.1
-
-# MYSQL数据库链接
-MYSQL=true
-MYSQL_HOST=127.0.0.1
-MYSQL_USER=root
-MYSQL_PASSWORD=root
-MYSQL_DATABASE=doodoo
-MYSQL_PORT=3306
-MYSQL_CHARSET=utf8mb4
-
-# MONGODB数据库链接
-MONGOOSE=false
-MONGOOSE_URI=mongodb://127.0.0.1:27017/doodoo
-
-# REDIS链接
-REDIS=false
-REDIS_HOST=127.0.0.1
-REDIS_PORT=6379
-REDIS_PREFIX=doodoo:
+app:
+  root: app
+  port: 3000
+  host: "127.0.0.1"
+  prefix: ""
 
 # 静态资源服务
-STATIC_DIR=www
-STATIC_MAXAGE=30 * 24 * 60 * 60
-STATIC_DYNAMIC=true
+static:
+  dir: www
+  maxAge: 30 * 24 * 60 * 60
+  dynamic: true
 ```
 
 ## 其他
@@ -157,7 +141,7 @@ node app.js
 ## 启动信息
 
 ```text
-[doodoo] Version: 1.1.1
+[doodoo] Version: 2.0.0
 [doodoo] Website: 127.0.0.1
 [doodoo] Nodejs Version: v8.12.0
 [doodoo] Nodejs Platform: darwin x64

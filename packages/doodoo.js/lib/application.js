@@ -61,10 +61,8 @@ module.exports = class Application extends Koa {
         this.hook = new Hook();
         debug("hooks %O", this.hook);
 
-        // router
+        // controller
         this.Controller = Controller;
-        this.router = this.options.router || new KoaRouter();
-        this.router.prefix(this.options.prefix || doodoo.getConf("app.prefix"));
 
         // step 1
         this.use(async (ctx, next) => {
@@ -128,6 +126,8 @@ module.exports = class Application extends Koa {
         this.useRoute = true;
 
         // router
+        this.router = this.options.router || new KoaRouter();
+        this.router.prefix(this.options.prefix || doodoo.getConf("app.prefix"));
         this.router = new Router({ router: this.router }).loadRouters();
         debug("router %O", this.router);
 

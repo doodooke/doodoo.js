@@ -1,0 +1,19 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "package.json",
+        "packages/doodoo-plugin-baas/package.json",
+        "packages/doodoo-plugin-dingding/package.json",
+        "packages/doodoo-plugin-dotenv/package.json",
+        "packages/doodoo-plugin-mongoose/package.json",
+        "packages/doodoo-plugin-mysql/package.json",
+        "packages/doodoo-plugin-nuxt/package.json",
+        "packages/doodoo-plugin-proxy/package.json",
+        "packages/doodoo-plugin-redis/package.json",
+        "packages/doodoo-plugin-webhook/package.json",
+        "packages/doodoo.js/package.json"
+      ]
+    }
+  }
+}

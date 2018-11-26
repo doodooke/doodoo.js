@@ -34,7 +34,13 @@ module.exports = class Router {
         for (const controller of controllers) {
             const paths = path.parse(controller);
             const Ctrl = require(path.resolve(this.root, controller));
-            if (Ctrl instanceof KoaRouter) {
+            if (
+                Ctrl instanceof KoaRouter ||
+                _.isEqual(
+                    Object.keys(Ctrl.__proto__),
+                    Object.keys(KoaRouter.prototype)
+                )
+            ) {
                 this.router.use(
                     path
                         .join("/", paths.dir, paths.name)

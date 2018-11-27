@@ -12,18 +12,20 @@ const _ = require("lodash");
  */
 async function usePlugin(plugin, options) {
     if (_.isString(plugin)) {
-        let required;
+        let required, modulePath;
         try {
-            required = require("./plugin/" + plugin);
+            modulePath = "./plugin/" + plugin;
+            required = require(modulePath);
         } catch (e) {
-            if (e.code !== "MODULE_NOT_FOUND") {
+            if (e.message !== `Cannot find module '${modulePath}'`) {
                 throw e;
             }
 
             try {
-                required = require(path.resolve("./plugin/" + plugin));
+                modulePath = path.resolve("./plugin/" + plugin);
+                required = require(modulePath);
             } catch (e) {
-                if (e.code !== "MODULE_NOT_FOUND") {
+                if (e.message !== `Cannot find module '${modulePath}'`) {
                     throw e;
                 }
 
@@ -60,7 +62,7 @@ async function requirePlugin(name, options = {}) {
         const required = require(name);
         return required;
     } catch (e) {
-        if (e.code !== "MODULE_NOT_FOUND") {
+        if (e.message !== `Cannot find module '${name}'`) {
             throw e;
         }
 

@@ -4,7 +4,7 @@ const yn = require("yn");
 const path = require("path");
 const _ = require("lodash");
 const isDev = (process.env.NODE_ENV || "development") === "development";
-const appDir = process.env.APP_ROOT;
+const appDir = doodoo.getConf("app.root");
 
 function createRoutes(srcDir) {
     const views = glob.sync("*/view/**/*.vue", {
@@ -74,24 +74,10 @@ module.exports = async () => {
         await builder.build();
     }
 
-    // router必须在nuxt前加载
-    let dispatch = false;
-    doodoo.middleware.forEach(m => {
-        if (m.name === "dispatch") {
-            dispatch = true;
-            return;
-        }
-    });
-    if (!dispatch && !process.env.APP_PREFIX) {
-        throw new Error(
-            "SyntaxTips: Router Must Load Before Nuxt Or Set APP_PREFIX"
-        );
-    }
-
     doodoo.use(async (ctx, next) => {
         if (
-            process.env.APP_PREFIX &&
-            ctx.path.indexOf(process.env.APP_PREFIX) === 0
+            doodoo.getConf("app.prefix") &&
+            ctx.path.indexOf(doodoo.getConf("app.prefix")) === 0
         ) {
             return await next();
         }

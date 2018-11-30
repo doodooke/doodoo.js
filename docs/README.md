@@ -4,9 +4,7 @@
 
 #### 简介
 
-​	Doodoo.js -- 中文最佳实践Node.js Web快速开发框架。支持Koa.js, Express.js中间件，支持模块化，插件，钩子机制，可以直接在项目里使用 ES6/7（Generator Function, Class, Async & Await）等特性。同时吸收了thinkphp，laravel等国内外众多框架的设计理念和思想，让开发 Node.js 项目更加简单、高效、灵活。
-
-​	使用 ES6/7 特性来开发项目可以大大提高开发效率，是趋势所在。并且新版的 Node.js 对 ES6 特性也有了较好的支持，即使有些特性还没有支持，也可以借助 [Babel](http://babeljs.io/) 编译来支持。
+​	Doodoo.js -- 中文最佳实践Node.js快速开发框架。支持Koa.js, Express.js中间件，支持模块机制，插件机制，钩子机制，让开发 Node.js 项目更加简单、高效、灵活。
 
 #### 特性
 
@@ -30,12 +28,12 @@
 
 #### 安装
 
-环境要求：node >= 7.6.0, git（doodoo.js的所有包都托管在github上）
+环境要求：node >= 7.6.0
 ```javascript
 //npm
-npm install doodooke/doodoo.js --save
+npm install doodoo.js --save
 //yarn
-yarn add doodooke/doodoo.js
+yarn add doodoo.js
 ```
 
 #### 使用 ES6/7 特性来开发项目
@@ -71,14 +69,12 @@ module.exports = class extends base {
 }
 ```
 
-​	项目中可以使用 ES6/7 里的特性，可以稳定运行在 >= 7.6.0 的 Node.js 环境中。
-
 #### 详细的日志
 
 ##### 服务 启动日志
 
 ```
-[doodoo] Version: 1.1.1
+[doodoo] Version: 2.0.0
 [doodoo] Website: 127.0.0.1
 [doodoo] Nodejs Version: v8.12.0
 [doodoo] Nodejs Platform: darwin x64
@@ -91,28 +87,9 @@ module.exports = class extends base {
 ##### HTTP 请求日志
 
 ```
-<-- GET /home/index/index
---> GET /home/index/index 200 4ms 
+<-- GET /demo/index/index
+--> GET /demo/index/index 200 4ms 
 ```
-
-#### 与其他框架的对比
-
-##### 与 express/koa 对比
-
-express/koa 是 2 个比较简单的框架，框架本身提供的功能比较简单，项目中需要借助大量的第三方插件才能完成项目的开发，所以灵活度比较高。但使用很多第三方组件一方面提高了项目的复杂度。
-
-koa 1.x 使用 ES6 里的 `*/yield` 解决了异步回调的问题，但 `*/yield` 只会是个过渡解决方案，会被 ES7 里的 `async/await` 所替代。
-
-##### 与 sails 对比
-
-sails 也是一个提供整套解决方案的 Node.js 框架，对数据库、REST API、安全方面也很多封装，使用起来比较方便。
-
-但 sails 对异步回调的问题还没有优化，还是使用 callback 的方式，给开发带来很大的不便，导致项目中无法较好的使用 ES6/7 特性。
-
-##### 与 thinkjs 对比
-
-thinkjs 是一个非常优秀的框架，在开发效率和体验上占有绝对优势，但是中间件非常少，框架还比较新，缺少社区等方面的支持，还没有经过超大型项目的检验。
-
 
 ### 创建项目
 
@@ -133,7 +110,7 @@ node app.js
 在项目目录下执行命令 `node app.js`，如果能看到类似下面的内容，表示服务启动成功。
 
 ```
-[doodoo] Version: 1.0.1
+[doodoo] Version: 2.0.0
 [doodoo] Website: 127.0.0.1
 [doodoo] Nodejs Version: v8.12.0
 [doodoo] Nodejs Platform: darwin x64
@@ -146,8 +123,6 @@ node app.js
 
 
 ### 项目结构
-
-​	项目默认使用的是mysql，redis数据库。
 
 ```
 
@@ -216,40 +191,21 @@ module.exports = class doodoo.Controller {
 }
 ```
 
-#### 使用 Babel 编译
-
-虽然现在的 Node.js 版本已经支持了很多 ES6 的特性，但这些特性现在还只是实现了，V8 里还没有对这些特性进行优化。如：`*/yield` 等功能。
-
-所以建议使用 Babel 来编译，一方面可以使用 ES6 和 ES7 几乎所有的特性，另一方面编译后的性能也比默认支持的要高。
-
 #### 使用 async/await
 
 `async/await` 是nodejs异步最终解决方案
 
 
 
-### 断点调试
-
-无论是在 VS Code（v1.7+） 下断点调试，还是在WebStorm 下断点调试，断点一定要设置在 runtime 目录下，不能设置在 app目录下。
-
-
-
-
-
 ### 常见问题
-
-#### 为什么推荐 ES6/7 语法开发项目
-
-ES6/7 里提供了大量的新特性，这些特性会带来巨大的开发便利和效率上的提升。如：ES6 里的 `*/yield` 和 ES7 里的 `async/await` 特性解决异步回调的问题；箭头函数解决 `this` 作用域的问题；`class` 语法糖解决类继承的问题。
-
-虽然现在 Node.js 环境还没有完全支持这些新的特性，但借助 Babel 编译，可以稳定运行在现在的 Node.js 环境中。所以我们尽可以享受这些新特性带来的便利。
 
 #### 如何修改服务监听的端口
 
-默认情况下，Node.js 服务监听的端口为 `3000`，如果需要修改的话，可以通过修改配置文件`.env` 来修改，如：
+默认情况下，Node.js 服务监听的端口为 `3000`，如果需要修改的话，可以通过修改配置文件`config.yaml` 来修改，如：
 
-```javascript
-APP_PORT=3000
+```yaml
+app:
+  port: 3000
 ```
 
 #### 并行处理
@@ -356,7 +312,7 @@ this.hook.run(name, ...args);
 this.download(file);
 this.view(data);
 this.success(errmsg: "ok", errcode: 0, data: data);
-this.error(errmsg = "error", errcode = 1);
+this.fail(errmsg = "error", errcode = 1);
 ```
 
 
@@ -366,39 +322,27 @@ this.error(errmsg = "error", errcode = 1);
 #### 默认配置
 
 
-```Text
-# .env文件
+```yaml
 # 应用配置
-APP_ROOT=app
-APP_PORT=3000
-APP_HOST=127.0.0.1
-
-# MYSQL数据库链接
-MYSQL=true
-MYSQL_HOST=127.0.0.1
-MYSQL_USER=root
-MYSQL_PASSWORD=root
-MYSQL_DATABASE=doodoo
-MYSQL_PORT=3306
-MYSQL_CHARSET=utf8mb4
-
-# REDIS链接
-REDIS=false
-REDIS_HOST=127.0.0.1
-REDIS_PORT=6379
-REDIS_PREFIX=doodoo:
+app:
+  root: app
+  port: 3000
+  host: "127.0.0.1"
+  prefix: ""
 
 # 静态资源服务
-STATIC_DIR=www
-STATIC_MAXAGE=30 * 24 * 60 * 60
-STATIC_DYNAMIC=true
+static:
+  dir: www
+  maxAge: 30 * 24 * 60 * 60
+  dynamic: true
 ```
 #### 修改配置
 
 创建 `.env` 配置文件，例如修改默认启动端口
 
-```javascript
-APP_PORT=3000
+```yaml
+app:
+  port: 3000
 ```
 
 ### 路由
@@ -417,14 +361,15 @@ Doodoo.js支持多级控制器，例如访问的路径是 `/demo/home/shop/produ
 
 
 ```javascript
-// 注册
-this.hook.add('addOrder', async function sendEmail(orderId) {
-    // 业务逻辑
-});
-this.hook.add('addOrder', async function addLog(orderId) {
-    // 业务逻辑
-});
+// hook.js
+// 注册新增订单钩子
+module.exports = {
+    async addOrder(){
+        // 业务逻辑
+    }
+}
 
+// 允许新增订单钩子
 // 运行 - 等待
 await this.hook.run('addOrder', 1);
 
@@ -495,7 +440,90 @@ app.start();
 
 [中间件列表](https://github.com/koajs/koa/wiki)
 
-### 线上部署
+## 插件
+插件是对中间件更深一层扩展，中间件可以很简单插件化。插件分为3种，第一种是doodoo.js内置插件，第二种是plugin目录下自己开发插件，第三种是直接使用npm发布的插件。npm上doodoo.js插件都是以`doodoo-plugin`开头。插件使用方式分2种，第一种app.plugin("xxx")，第二种doodoo.usePlugin("xxx")。
+
+
+
+### 常用插件列表
+
+#### redis
+
+注册：
+
+`app.plugin("redis") `
+
+配置：
+
+第一种方式
+
+```javascript
+app.plugin("redis", {
+    host: "xxx",
+    port: "xxx",
+    prefix: "xxx",
+    password: "xxx"
+});
+```
+
+第二种方式（推荐使用）
+```yaml
+# config.yaml
+redis:
+    host: "xxx"
+    port: "xxx"
+    prefix: "xxx"
+    password: "xxx"
+```
+
+使用
+
+`this.redis` 或者 `doodoo.redis` 调用，具体api接口参考`https://www.npmjs.com/package/redis`
+
+#### mysql
+
+注册
+
+`app.plugin("mysql")`
+
+配置
+
+第一种方式
+
+```javascript
+app.plugin("mysql", {
+    host: "xxx",
+    user: "xxx",
+    password: "xxx",
+    port: "xxx",
+    database: "xxx",
+    charset: "xxx"
+});
+```
+
+第二种方式（推荐使用）
+
+```yaml
+# config.yaml
+mysql:
+    host: "xxx"
+    user: "xxx"
+    password: "xxx"
+    port: "xxx"
+    database: "xxx"
+    charset: "xxx"
+```
+
+使用
+
+`this.model("xxx")` 或者 `this.model("xxx")` 调用，具体api接口参考`http://bookshelfjs.org`
+
+### 插件列表
+
+[插件列表](https://www.npmjs.com/search?q=doodoo)
+
+
+## 线上部署
 
 正式环境推荐使用 `pm2` 启动项目，配置参考
 
@@ -504,11 +532,6 @@ app.start();
     "name": "doodoo.js-demo",
     "script": "app.js",
     "watch": false,
-    "ignore_watch": [
-        "www/public",
-        "logs",
-        "node_modules"
-    ],
     "exec_mode": "cluster",
     "max_memory_restart": "1G",
     "error_file": "./logs/error.log",

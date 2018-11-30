@@ -62,7 +62,7 @@ module.exports = class extends base {
 ## 安装
 
 ```sh
-yarn add doodooke/doodoo.js
+yarn add doodoo.js
 ```
 
 ## 创建启动文件

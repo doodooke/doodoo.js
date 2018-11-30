@@ -1,4 +1,3 @@
-const yn = require("yn");
 const redis = require("redis");
 const bluebird = require("bluebird");
 
@@ -8,10 +7,10 @@ bluebird.promisifyAll(redis.Multi.prototype);
 class Redis {
     constructor(options = {}) {
         this.options = options.redis || {
-            host: process.env.REDIS_HOST,
-            port: process.env.REDIS_PORT,
-            prefix: process.env.REDIS_PREFIX,
-            password: process.env.REDIS_PASSWORD
+            host: doodoo.getConf("redis.host"),
+            port: doodoo.getConf("redis.port"),
+            prefix: doodoo.getConf("redis.prefix"),
+            password: doodoo.getConf("redis.password")
         };
     }
 
@@ -21,7 +20,5 @@ class Redis {
 }
 
 module.exports = options => {
-    if (yn(process.env.REDIS)) {
-        doodoo.redis = new Redis(options).getRedis();
-    }
+    doodoo.redis = new Redis(options).getRedis();
 };

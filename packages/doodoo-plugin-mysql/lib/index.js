@@ -1,6 +1,5 @@
 const path = require("path");
 const glob = require("glob");
-const yn = require("yn");
 const debug = require("debug")("doodoo");
 const _knex = require("knex");
 const _bookshelf = require("bookshelf");
@@ -28,7 +27,7 @@ function getBookshelf(connection) {
 }
 
 function loadModels() {
-    const root = process.env.APP_ROOT;
+    const root = doodoo.getConf("app.root");
     const rootModels = glob.sync("*/model/**/*.{js,js7}", { cwd: root });
     const models = {};
     for (const model of rootModels) {
@@ -41,31 +40,29 @@ function loadModels() {
 
 module.exports = (options = {}) => {
     // mysql
-    if (yn(process.env.MYSQL)) {
-        const connection = options.mysql || {
-            host: process.env.MYSQL_HOST,
-            user: process.env.MYSQL_USER,
-            password: process.env.MYSQL_PASSWORD,
-            port: process.env.MYSQL_PORT,
-            database: process.env.MYSQL_DATABASE,
-            charset: process.env.MYSQL_CHARSET
-        };
-        // global bookshelf
-        doodoo.bookshelf = getBookshelf({
-            client: "mysql",
-            connection: connection
-        });
+    const connection = options.mysql || {
+        host: doodoo.getConf("mysql.host"),
+        user: doodoo.getConf("mysql.user"),
+        password: doodoo.getConf("mysql.password"),
+        port: doodoo.getConf("mysql.port"),
+        database: doodoo.getConf("mysql.database"),
+        charset: doodoo.getConf("mysql.charset")
+    };
+    // global bookshelf
+    doodoo.bookshelf = getBookshelf({
+        client: "mysql",
+        connection: connection
+    });
 
-        const models = loadModels("*/model/**/*.{js,js7}");
-        if (doodoo.models) {
-            Object.assign(doodoo.models, models);
-        } else {
-            doodoo.models = models;
-        }
-
-        doodoo.model = model => {
-            return doodoo.models[model];
-        };
-        debug("models %O", this.models);
+    const models = loadModels("*/model/**/*.{js,js7}");
+    if (doodoo.models) {
+        Object.assign(doodoo.models, models);
+    } else {
+        doodoo.models = models;
     }
+
+    doodoo.model = model => {
+        return doodoo.models[model];
+    };
+    debug("models %O", this.models);
 };

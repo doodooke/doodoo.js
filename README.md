@@ -153,7 +153,7 @@ node app.js
 
 
 ## 使用手册
-[Doodoo.js使用手册](https://github.com/doodooke/doodoo.js/tree/master/docs/README.md)
+[Doodoo.js使用手册](https://doodooke.github.io/doodoo.js/index.html)
 
 ## 问题反馈
 在使用中有任何问题，请使用以下联系方式联系我们

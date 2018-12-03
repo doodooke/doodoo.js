@@ -1,4 +1,5 @@
 const _ = require("lodash");
+const path = require("path");
 const jwt = require("jsonwebtoken");
 const Query = require("./query");
 
@@ -73,9 +74,14 @@ module.exports = options => {
     const router = doodoo.router;
     router.use("/plugin/baas/:moduleName", async (ctx, next) => {
         const { moduleName } = ctx.params;
+        const info = require(path.resolve(
+            doodoo.getConf("app.root"),
+            moduleName,
+            "plugin.js"
+        ));
 
         // 获取baas配置信息
-        ctx.baasInfo = _.get(ctx.plugin[moduleName], "baas");
+        ctx.baasInfo = _.get(info, "baas");
         if (!ctx.baasInfo) {
             throw new Error(
                 `PluginError: Module ${moduleName} Don't Support Baas`

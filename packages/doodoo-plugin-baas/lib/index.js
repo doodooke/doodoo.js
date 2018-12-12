@@ -256,7 +256,7 @@ module.exports = options => {
                 );
             }
 
-            await BaaS.bookshelf.Collection.extend({
+            await doodoo.bookshelf.Collection.extend({
                 model: ctx.model(modelName)
             })
                 .forge(result)

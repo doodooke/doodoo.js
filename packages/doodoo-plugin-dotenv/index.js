@@ -10,10 +10,6 @@ dotenv.config({
     path: `${process.env.NODE_ENV}.env`
 });
 
-doodoo.config = {};
-for (const key in process.env) {
-    _.set(doodoo.config, key.split("_"), process.env[key]);
-}
 doodoo.getConf = path => {
-    return _.get(doodoo.config, _.toUpper(path));
+    return _.get(process.env, _.toUpper(path).replace(".", "_"));
 };

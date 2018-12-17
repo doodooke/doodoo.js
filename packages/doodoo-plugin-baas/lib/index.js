@@ -1,6 +1,8 @@
 const _ = require("lodash");
 const path = require("path");
+const fs = require("fs");
 const jwt = require("jsonwebtoken");
+const decache = require("decache");
 const Query = require("./query");
 
 /**
@@ -77,15 +79,28 @@ function withRelateds(ctx) {
 
 module.exports = options => {
     const router = doodoo.router;
+    const pluginMTime = {};
     router.use("/plugin/baas/:moduleName", async (ctx, next) => {
         const { moduleName } = ctx.params;
-        const info = require(path.resolve(
+
+        // plugin.js修改，重新加载
+        const pluginFilePath = path.resolve(
             doodoo.getConf("app.root"),
             moduleName,
             "plugin.js"
-        ));
+        );
+        const mTime = fs.statSync(pluginFilePath).mtime.getTime();
+        if (pluginMTime[moduleName]) {
+            if (pluginMTime[moduleName] < mTime) {
+                decache(pluginFilePath);
+                pluginMTime[moduleName] = mTime;
+            }
+        } else {
+            pluginMTime[moduleName] = mTime;
+        }
 
         // 获取baas配置信息
+        const info = require(pluginFilePath);
         ctx.baasInfo = _.get(info, "baas");
         if (!ctx.baasInfo) {
             throw new Error(

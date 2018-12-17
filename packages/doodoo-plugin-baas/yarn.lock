@@ -6,6 +6,16 @@ buffer-equal-constant-time@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz#f8e71132f7ffe6e01a5c9697a4c6f3e48d5cc819"
 
+callsite@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/callsite/-/callsite-1.0.0.tgz#280398e5d664bd74038b6f0905153e6e8af1bc20"
+
+decache@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/decache/-/decache-4.5.0.tgz#8709b1ccbe5a4ddcadfba42abff7e6abbbebc76b"
+  dependencies:
+    callsite "^1.0.0"
+
 ecdsa-sig-formatter@1.0.10:
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/ecdsa-sig-formatter/-/ecdsa-sig-formatter-1.0.10.tgz#1c595000f04a8897dfb85000892a0f4c33af86c3"

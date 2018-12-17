@@ -20,7 +20,12 @@ module.exports = {
                 model: {
                     user: {
                         auth: "Token",
-                        curd: ["add", "fetch"]
+                        curd: ["add", "fetch"],
+                        field: {
+                            "app_id": ctx => {
+                                return "xxx";
+                            }
+                        }
                     }
                 }
             },
@@ -132,7 +137,6 @@ module.exports = options => {
             }
         }
 
-        await ctx.hook.run(`pluginBaaS_${className}`, ctx);
         await next();
     });
 
@@ -160,11 +164,20 @@ module.exports = options => {
                 ctx.fields = Query.toObject(query.where).whereJson;
             }
 
-            await ctx.hook.run(
-                `pluginBaaS_${className}${_.capitalize(modelName)}`,
-                ctx,
-                ctx.fields
-            );
+            // 获取filed配置信息
+            ctx.fieldInfo = _.get(ctx.modelInfo, "field");
+            if (ctx.fieldInfo) {
+                const _fields = {};
+                for (const key in ctx.fieldInfo) {
+                    if (_.isFunction(ctx.fieldInfo[key])) {
+                        _fields[key] = await ctx.fieldInfo[key](ctx);
+                    } else {
+                        _fields[key] = ctx.fieldInfo[key];
+                    }
+                }
+                Object.assign(ctx.fields, _fields);
+            }
+
             await next();
         }
     );
@@ -193,14 +206,6 @@ module.exports = options => {
                 }
             }
 
-            await ctx.hook.run(
-                `pluginBaaS_${className}${_.capitalize(
-                    modelName
-                )}Before${_.capitalize(saveType)}`,
-                ctx,
-                fields
-            );
-
             const result = await ctx
                 .model(modelName)
                 .forge(fields)
@@ -225,14 +230,6 @@ module.exports = options => {
                     `PluginError: Module ${moduleName} Class ${className} Model ${modelName} No Permission Delete`
                 );
             }
-
-            await ctx.hook.run(
-                `pluginBaaS_${className}${_.capitalize(
-                    modelName
-                )}BeforeDelete}`,
-                ctx,
-                fields
-            );
 
             const result = await ctx
                 .model(modelName)
@@ -293,14 +290,6 @@ module.exports = options => {
                 option.page = page;
                 option.pageSize = pageSize;
             }
-
-            await ctx.hook.run(
-                `pluginBaaS_${className}${_.capitalize(
-                    modelName
-                )}Before${_.capitalize(fetchType)}`,
-                ctx,
-                fields
-            );
 
             let result = await ctx
                 .model(modelName)

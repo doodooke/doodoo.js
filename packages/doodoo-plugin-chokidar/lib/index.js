@@ -53,7 +53,6 @@ watcher
             paths.dir.shift();
             paths.dir = paths.dir.join("/");
 
-            // 添加新的
             const Ctrl = require(_path.resolve(path));
             if (
                 Ctrl instanceof KoaRouter ||
@@ -62,8 +61,9 @@ watcher
                     Object.keys(KoaRouter.prototype)
                 )
             ) {
+                // 添加新的
                 doodoo.router.use(
-                    path
+                    _path
                         .join("/", paths.dir, paths.name)
                         .replace(/\\/g, "/")
                         .replace(/\/controller/, ""),
@@ -114,6 +114,7 @@ watcher
                     .join("/", paths.dir, paths.name, layer.method)
                     .replace(/\\/g, "/")
                     .replace(/\/controller/, "");
+                // 添加新的
                 doodoo.router.all(layerPath, layer.callback);
             }
         }
@@ -144,16 +145,6 @@ watcher
             paths.dir.shift();
             paths.dir = paths.dir.join("/");
 
-            // 移除旧的
-            const layerPath = _path
-                .join("/", paths.dir, paths.name)
-                .replace(/\\/g, "/")
-                .replace(/\/controller/, "");
-            doodoo.router.stack = _.filter(doodoo.router.stack, o => {
-                return o.path === layerPath;
-            });
-
-            // 添加新的
             const Ctrl = require(_path.resolve(path));
             if (
                 Ctrl instanceof KoaRouter ||
@@ -162,8 +153,15 @@ watcher
                     Object.keys(KoaRouter.prototype)
                 )
             ) {
+                // 移除旧的
+                for (const layer of Ctrl.routes().router.stack) {
+                    doodoo.router.stack = _.filter(doodoo.router.stack, o => {
+                        return o.path === layer.path;
+                    });
+                }
+                // 添加新的
                 doodoo.router.use(
-                    path
+                    _path
                         .join("/", paths.dir, paths.name)
                         .replace(/\\/g, "/")
                         .replace(/\/controller/, ""),
@@ -214,6 +212,11 @@ watcher
                     .join("/", paths.dir, paths.name, layer.method)
                     .replace(/\\/g, "/")
                     .replace(/\/controller/, "");
+                // 移除旧的
+                doodoo.router.stack = _.filter(doodoo.router.stack, o => {
+                    return o.path === layerPath;
+                });
+                // 添加新的
                 doodoo.router.all(layerPath, layer.callback);
             }
         }
@@ -244,14 +247,70 @@ watcher
             paths.dir.shift();
             paths.dir = paths.dir.join("/");
 
-            // 移除旧的
-            const layerPath = _path
-                .join("/", paths.dir, paths.name)
-                .replace(/\\/g, "/")
-                .replace(/\/controller/, "");
-            doodoo.router.stack = _.filter(doodoo.router.stack, o => {
-                return o.path === layerPath;
-            });
+            const Ctrl = require(_path.resolve(path));
+            if (
+                Ctrl instanceof KoaRouter ||
+                _.isEqual(
+                    Object.keys(Ctrl.__proto__),
+                    Object.keys(KoaRouter.prototype)
+                )
+            ) {
+                // 移除旧的
+                for (const layer of Ctrl.routes().router.stack) {
+                    doodoo.router.stack = _.filter(doodoo.router.stack, o => {
+                        return o.path === layer.path;
+                    });
+                }
+                return;
+            }
+            if (!isClass(Ctrl)) {
+                return;
+            }
+
+            const methods = Object.getOwnPropertyNames(Ctrl.prototype);
+            const layers = [];
+            for (const method of methods) {
+                if (_.startsWith(method, "_") || method === "constructor") {
+                    continue;
+                }
+
+                layers.push({
+                    method: method,
+                    callback: async (ctx, next) => {
+                        const ctrl = new Ctrl(ctx, next);
+                        const runMethods = [
+                            "_init",
+                            "_initialize",
+                            "_before",
+                            `_before_${method}`,
+                            method,
+                            `_after_${method}`,
+                            "_after"
+                        ];
+
+                        for (const method of runMethods) {
+                            if (_.includes(methods, method)) {
+                                await ctrl[method]();
+                            }
+
+                            if (ctx.status !== 404) {
+                                break;
+                            }
+                        }
+                    }
+                });
+            }
+
+            for (const layer of layers) {
+                const layerPath = _path
+                    .join("/", paths.dir, paths.name, layer.method)
+                    .replace(/\\/g, "/")
+                    .replace(/\/controller/, "");
+                // 移除旧的
+                doodoo.router.stack = _.filter(doodoo.router.stack, o => {
+                    return o.path === layerPath;
+                });
+            }
         }
 
         // 模型

@@ -58,6 +58,7 @@ module.exports = class Application extends Koa {
         this.on("error", this.notifyError);
 
         // hook
+        this.Hook = Hook;
         this.hook = new Hook();
         debug("hooks %O", this.hook);
 

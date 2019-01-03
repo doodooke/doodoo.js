@@ -155,7 +155,7 @@ watcher
             ) {
                 // 移除旧的
                 for (const layer of Ctrl.routes().router.stack) {
-                    doodoo.router.stack = _.filter(doodoo.router.stack, o => {
+                    _.remove(doodoo.router.stack, o => {
                         return o.path === layer.path;
                     });
                 }
@@ -212,10 +212,12 @@ watcher
                     .join("/", paths.dir, paths.name, layer.method)
                     .replace(/\\/g, "/")
                     .replace(/\/controller/, "");
+
                 // 移除旧的
-                doodoo.router.stack = _.filter(doodoo.router.stack, o => {
+                _.remove(doodoo.router.stack, o => {
                     return o.path === layerPath;
                 });
+
                 // 添加新的
                 doodoo.router.all(layerPath, layer.callback);
             }
@@ -257,7 +259,7 @@ watcher
             ) {
                 // 移除旧的
                 for (const layer of Ctrl.routes().router.stack) {
-                    doodoo.router.stack = _.filter(doodoo.router.stack, o => {
+                    _.remove(doodoo.router.stack, o => {
                         return o.path === layer.path;
                     });
                 }
@@ -306,8 +308,9 @@ watcher
                     .join("/", paths.dir, paths.name, layer.method)
                     .replace(/\\/g, "/")
                     .replace(/\/controller/, "");
+
                 // 移除旧的
-                doodoo.router.stack = _.filter(doodoo.router.stack, o => {
+                _.remove(doodoo.router.stack, o => {
                     return o.path === layerPath;
                 });
             }

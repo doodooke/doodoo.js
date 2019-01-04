@@ -156,7 +156,15 @@ watcher
                 // 移除旧的
                 for (const layer of Ctrl.routes().router.stack) {
                     _.remove(doodoo.router.stack, o => {
-                        return o.path === layer.path;
+                        return (
+                            o.path ===
+                            doodoo.getConf("app.prefix") +
+                                _path
+                                    .join("/", paths.dir, paths.name)
+                                    .replace(/\\/g, "/")
+                                    .replace(/\/controller/, "") +
+                                layer.path
+                        );
                     });
                 }
                 // 添加新的
@@ -215,7 +223,7 @@ watcher
 
                 // 移除旧的
                 _.remove(doodoo.router.stack, o => {
-                    return o.path === layerPath;
+                    return o.path === doodoo.getConf("app.prefix") + layerPath;
                 });
 
                 // 添加新的
@@ -311,7 +319,7 @@ watcher
 
                 // 移除旧的
                 _.remove(doodoo.router.stack, o => {
-                    return o.path === layerPath;
+                    return o.path === doodoo.getConf("app.prefix") + layerPath;
                 });
             }
         }

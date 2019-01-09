@@ -170,15 +170,8 @@ module.exports = options => {
                 );
             }
 
-            // 把post参数或者get参数处理成json fields
+            // 安全数据
             ctx.fields = {};
-            if (ctx.isPost()) {
-                ctx.fields = ctx.post;
-            }
-            if (ctx.isGet()) {
-                ctx.fields = Query.toObject(query.where).whereJson;
-            }
-
             // 获取filed配置信息
             ctx.fieldInfo = _.get(ctx.modelInfo, "field");
             if (ctx.fieldInfo) {
@@ -202,7 +195,7 @@ module.exports = options => {
         async (ctx, next) => {
             const { moduleName, className, modelName } = ctx.params;
             const saveType = ctx.params[0];
-            const fields = ctx.fields;
+            const fields = Object.assign({}, ctx.post, ctx.fields);
             const curd = _.get(ctx.modelInfo, "curd");
 
             if (fields.id) {

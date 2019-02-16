@@ -9,6 +9,7 @@ class Redis {
         this.options = options.redis || {
             host: doodoo.getConf("redis.host"),
             port: doodoo.getConf("redis.port"),
+            url: doodoo.getConf("redis.url"),
             prefix: doodoo.getConf("redis.prefix"),
             password: doodoo.getConf("redis.password")
         };

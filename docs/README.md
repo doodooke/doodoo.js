@@ -201,9 +201,9 @@ module.exports = class doodoo.Controller {
 
 #### 如何修改服务监听的端口
 
-默认情况下，Node.js 服务监听的端口为 `3000`，如果需要修改的话，可以通过修改配置文件`config.yaml` 来修改，如：
+默认情况下，Node.js 服务监听的端口为 `3000`，如果需要修改的话，可以通过修改配置文件`config.yml` 来修改，如：
 
-```yaml
+```yml
 app:
   port: 3000
 ```
@@ -322,7 +322,7 @@ this.fail(errmsg = "error", errcode = 1);
 #### 默认配置
 
 
-```yaml
+```yml
 # 应用配置
 app:
   root: app
@@ -340,7 +340,7 @@ static:
 
 创建 `.env` 配置文件，例如修改默认启动端口
 
-```yaml
+```yml
 app:
   port: 3000
 ```
@@ -467,8 +467,8 @@ app.plugin("redis", {
 ```
 
 第二种方式（推荐使用）
-```yaml
-# config.yaml
+```yml
+# config.yml
 redis:
     host: "xxx"
     port: "xxx"
@@ -503,8 +503,8 @@ app.plugin("mysql", {
 
 第二种方式（推荐使用）
 
-```yaml
-# config.yaml
+```yml
+# config.yml
 mysql:
     host: "xxx"
     user: "xxx"

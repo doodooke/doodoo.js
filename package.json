@@ -3,8 +3,7 @@
   "private": true,
   "scripts": {
     "eslint": "eslint ./packages",
-    "eslint:fix": "eslint --fix ./packages",
-    "copy:readme": "cp ./packages/doodoo.js/README.md ./"
+    "eslint:fix": "eslint --fix ./packages"
   },
   "pre-commit": [
     "eslint",

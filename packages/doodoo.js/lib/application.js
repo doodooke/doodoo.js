@@ -18,11 +18,16 @@ const pkg = require("./../package.json");
 global.doodoo = _global;
 
 // 加载配置
-doodoo.config = doodoo.yamlLoad(path.resolve(__dirname, "..", "config.yml"));
+// 支持yml，yaml格式
+doodoo.config = {};
 Object.assign(
     doodoo.config,
+    doodoo.yamlLoad(path.resolve(__dirname, "..", "config.yml")),
+    doodoo.yamlLoad(path.resolve(__dirname, "..", "config.yaml")),
     doodoo.yamlLoad("config.yml"),
-    doodoo.yamlLoad(`${process.env.NODE_ENV}.config.yml`)
+    doodoo.yamlLoad("config.yaml"),
+    doodoo.yamlLoad(`${process.env.NODE_ENV}.config.yml`),
+    doodoo.yamlLoad(`${process.env.NODE_ENV}.config.yaml`)
 );
 doodoo.getConf = path => {
     return _.get(doodoo.config, path);

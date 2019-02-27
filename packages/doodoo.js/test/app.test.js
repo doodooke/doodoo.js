@@ -1,21 +1,27 @@
-const test = require("ava");
-const supertest = require("supertest");
-const app = require("./entry");
+const request = require("supertest");
+const Doodoo = require("./../lib/application");
 
-let server, request;
+// Change working dir
+process.chdir(__dirname);
 
-test.before(async t => {
-    server = await app.start();
-    request = supertest(server);
-});
+let app, server;
 
-test.after(t => {
-    server.close();
-});
+describe("demo controller", () => {
+    beforeEach(async () => {
+        app = new Doodoo();
+        server = await app.start();
+    });
 
-test(async t => {
-    const res = await request.get("/test/test/index");
+    afterEach(() => {
+        server.close();
+    });
 
-    t.is(200, res.status);
-    t.is(res.body.data, "Hello Doodoo.js");
+    it("call http should response 200", done => {
+        request(server)
+            .get("/test/test/index")
+            .expect(200)
+            // eslint-disable-next-line quotes
+            .expect('{"errmsg":"ok","errcode":0,"data":"Hello Doodoo.js"}')
+            .end(done);
+    });
 });

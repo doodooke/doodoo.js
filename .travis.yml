@@ -11,9 +11,8 @@ node_js:
   - 11
 before_script:
     - cd packages/doodoo.js
-    - yarn install
+    - yarn && yarn add codecov
 script:
     - yarn run cover
 after_script:
-    - yarn add codecov
-    - ./node_modules/.bin/codecov
+    - codecov

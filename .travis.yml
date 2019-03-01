@@ -15,5 +15,5 @@ before_script:
 script:
     - yarn run cover
 after_script:
-    - yarn install codecov
+    - yarn add codecov
     - ./node_modules/.bin/codecov

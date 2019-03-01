@@ -1,9 +1,5 @@
 sudo: false
 language: node_js
-os:
-  - linux
-  - osx
-  - windows
 node_js:
   - 8
   - 9
@@ -15,4 +11,5 @@ before_script:
 script:
     - yarn run cover
 after_script:
-    - yarn run codecov
+    - yarn add codecov
+    - ./node_modules/.bin/codecov

@@ -2,6 +2,7 @@
 
 [![license](https://img.shields.io/github/license/doodooke/doodoo.js.svg?style=flat-square)](http://www.doodooke.com)
 [![travis-ci](https://img.shields.io/travis/doodooke/doodoo.js.svg?style=flat-square)](https://travis-ci.org/doodooke/doodoo.js)
+[![codecov](https://codecov.io/gh/doodooke/doodoo.js/branch/master/graph/badge.svg)](https://codecov.io/gh/doodooke/doodoo.js)
 [![Dependency Status](https://img.shields.io/david/doodooke/doodoo.js.svg?style=flat-square)](https://david-dm.org/doodooke/doodoo.js)
 
 Doodoo.js -- 中文最佳实践Node.js Web快速开发框架，支持Koa.js, Express.js中间件。

@@ -4,7 +4,11 @@ const _ = require("lodash");
 const _path = require("path");
 const KoaRouter = require("koa-router");
 
-const watcher = chokidar.watch("app/**/*.{js,js7}", {
+if (!global.doodoo) {
+    global.doodoo = {};
+}
+
+doodoo.watcher = chokidar.watch("app/**/*.{js,js7}", {
     ignored: /(^|[\/\\])\../,
     ignored: function(path, stats) {
         return (
@@ -41,7 +45,7 @@ function isHook(path) {
     return /hook.js/.test(path);
 }
 
-watcher
+doodoo.watcher
     .on("ready", () => console.log("[doodoo] Waiting for file changes !!!"))
     .on("add", path => {
         console.log(`File ${path} has been added`);

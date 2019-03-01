@@ -5,7 +5,7 @@
   "main": "lib/application.js",
   "scripts": {
     "test": "mocha --recursive test/{,**/}*.test.js",
-    "cover": "istanbul cover _mocha -- --recursive test/{,**/}*.test.js",
+    "cover": "istanbul cover node_modules/mocha/bin/_mocha -- --recursive test/{,**/}*.test.js",
     "doc": "jsdoc -r --readme ./README.md -d docs ./lib"
   },
   "keywords": [

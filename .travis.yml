@@ -5,16 +5,15 @@ os:
   - osx
   - windows
 node_js:
-  - 7
   - 8
   - 9
   - 10
   - 11
 before_script:
     - cd packages/doodoo.js
-    - npm install
+    - yarn install
 script:
-    - npm run cover
+    - yarn run cover
 after_script:
-    - npm install codecov
+    - yarn install codecov
     - ./node_modules/.bin/codecov

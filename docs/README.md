@@ -28,7 +28,7 @@
 
 #### 安装
 
-环境要求：node >= 7.6.0
+环境要求：node >= 8.0.0
 ```javascript
 //npm
 npm install doodoo.js --save

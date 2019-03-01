@@ -36,7 +36,7 @@ module.exports = class extends base {
     }
 }
 ```
-环境要求：Node.js >= 7.6.0
+环境要求：Node.js >= 8.0.0
 
 
 ## 特性

@@ -16,6 +16,9 @@
     "framework",
     "koa"
   ],
+  "engines": {
+    "node": ">= 8.0.0"
+  },
   "author": "heqing",
   "license": "MIT",
   "dependencies": {

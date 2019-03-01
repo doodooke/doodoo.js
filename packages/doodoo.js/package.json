@@ -5,7 +5,7 @@
   "main": "lib/application.js",
   "scripts": {
     "test": "mocha --recursive test/{,**/}*.test.js",
-    "cover": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter spec --recursive test/{,**/}*.test.js",
+    "cover": "nyc npm run test && nyc report --reporter=text-lcov > coverage.lcov",
     "doc": "jsdoc -r --readme ./README.md -d docs ./lib"
   },
   "keywords": [
@@ -36,9 +36,9 @@
     "shelljs": "^0.8.2"
   },
   "devDependencies": {
-    "istanbul": "^1.1.0-alpha.1",
     "jsdoc": "^3.5.5",
     "mocha": "^6.0.2",
+    "nyc": "^13.3.0",
     "supertest": "^3.0.0"
   },
   "gitHead": "7c95119ff21f2671875c491987bb1924c396f3e8"

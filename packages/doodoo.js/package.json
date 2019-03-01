@@ -6,6 +6,7 @@
   "scripts": {
     "test": "mocha --recursive test/{,**/}*.test.js",
     "cover": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter spec --recursive test/{,**/}*.test.js",
+    "codecov": "codecov",
     "doc": "jsdoc -r --readme ./README.md -d docs ./lib"
   },
   "keywords": [
@@ -36,6 +37,7 @@
     "shelljs": "^0.8.2"
   },
   "devDependencies": {
+    "codecov": "^3.2.0",
     "istanbul": "^1.1.0-alpha.1",
     "jsdoc": "^3.5.5",
     "mocha": "^6.0.2",

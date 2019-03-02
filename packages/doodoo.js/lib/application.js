@@ -114,12 +114,8 @@ module.exports = class Application extends Koa {
         this.useBody = true;
         this.use(async (ctx, next) => {
             await body({ multipart: true })(ctx, async () => {
-                if (!ctx.request.body.files) {
-                    ctx.post = ctx.request.body;
-                } else {
-                    ctx.post = ctx.request.body.fields;
-                    ctx.file = ctx.request.body.files;
-                }
+                ctx.post = ctx.request.body;
+                ctx.file = ctx.request.files;
             });
 
             await next();

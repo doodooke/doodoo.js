@@ -109,11 +109,11 @@ module.exports = class Application extends Koa {
      * Use a body middleware
      * @description The middleware is finally loaded by default, which can be manually invoked.
      */
-    body() {
+    body(opts = {}) {
         // step 2
         this.useBody = true;
         this.use(async (ctx, next) => {
-            await body({ multipart: true })(ctx, async () => {
+            await body(Object.assign({ multipart: true }, opts))(ctx, async () => {
                 ctx.post = ctx.request.body;
                 ctx.file = ctx.request.files;
             });

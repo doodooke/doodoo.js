@@ -1,6 +1,6 @@
 {
   "name": "doodoo.js",
-  "version": "2.0.1-alpha.10",
+  "version": "2.0.1-alpha.11",
   "description": "Doodoo web app framework",
   "main": "lib/application.js",
   "scripts": {

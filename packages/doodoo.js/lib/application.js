@@ -113,10 +113,13 @@ module.exports = class Application extends Koa {
         // step 2
         this.useBody = true;
         this.use(async (ctx, next) => {
-            await body(Object.assign({ multipart: true }, opts))(ctx, async () => {
-                ctx.post = ctx.request.body;
-                ctx.file = ctx.request.files;
-            });
+            await body(Object.assign({ multipart: true }, opts))(
+                ctx,
+                async () => {
+                    ctx.post = ctx.request.body;
+                    ctx.file = ctx.request.files;
+                }
+            );
 
             await next();
         });
@@ -126,7 +129,7 @@ module.exports = class Application extends Koa {
      * Use a route middleware
      * @description The middleware automatically loads routes
      */
-    route() {
+    route(allowedMethods) {
         // step 3
         this.useRoute = true;
 
@@ -135,7 +138,11 @@ module.exports = class Application extends Koa {
         debug("router %O", this.router);
 
         this.use(this.router.routes());
-        this.use(this.router.allowedMethods());
+
+        // allowedMethods
+        if (allowedMethods) {
+            this.use(this.router.allowedMethods(allowedMethods));
+        }
     }
 
     /**

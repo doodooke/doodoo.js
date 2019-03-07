@@ -2,12 +2,12 @@
   "name": "doodoo",
   "private": true,
   "scripts": {
+    "bootstrap": "yarn && lerna bootstrap",
     "eslint": "eslint ./packages",
     "eslint:fix": "eslint --fix ./packages"
   },
   "pre-commit": [
-    "eslint",
-    "copy:readme"
+    "eslint"
   ],
   "devDependencies": {
     "eslint": "^5.8.0",

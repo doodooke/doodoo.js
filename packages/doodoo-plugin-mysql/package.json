@@ -1,6 +1,6 @@
 {
     "name": "doodoo-plugin-mysql",
-    "version": "1.0.3-alpha.0",
+    "version": "1.0.3",
     "description": "doodoo plugin mysql",
     "keywords": [
         "doodoo"

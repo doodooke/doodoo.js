@@ -19,10 +19,8 @@ global.doodoo = _global;
 
 // 加载配置
 // 支持yml，yaml格式
-doodoo.config = {};
 const env = process.env.NODE_ENV || "development";
-Object.assign(
-    doodoo.config,
+doodoo.config = _.merge(
     doodoo.yamlLoad(path.resolve(__dirname, "..", "config.yml")),
     doodoo.yamlLoad(path.resolve(__dirname, "..", "config.yaml")),
     doodoo.yamlLoad("config.yml"),

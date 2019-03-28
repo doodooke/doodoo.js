@@ -49,6 +49,7 @@ module.exports = (options = {}) => {
         charset: doodoo.getConf("mysql.charset")
     };
     // global bookshelf
+    doodoo.getBookshelf = getBookshelf;
     doodoo.bookshelf = getBookshelf({
         client: "mysql",
         connection: connection

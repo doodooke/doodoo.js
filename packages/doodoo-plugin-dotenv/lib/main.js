@@ -5,7 +5,7 @@ const path = require("path");
  * Parses a string or buffer into an object
  * @param {(string|Buffer)} src - source to be parsed
  * @returns {Object} keys and values from src
-*/
+ */
 function parse(src) {
     const obj = {};
 

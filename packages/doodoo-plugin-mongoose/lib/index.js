@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const glob = require("glob");
 const path = require("path");
+const debug = require("debug");
 
 function loadModels() {
     const root = doodoo.getConf("app.root");

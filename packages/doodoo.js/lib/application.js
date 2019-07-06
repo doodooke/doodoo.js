@@ -73,6 +73,9 @@ module.exports = class Application extends Koa {
 
         // step 1
         this.use(async (ctx, next) => {
+            // skip body
+            ctx.skipBody = false;
+
             const start = Date.now();
 
             await next();
@@ -111,13 +114,15 @@ module.exports = class Application extends Koa {
         // step 2
         this.useBody = true;
         this.use(async (ctx, next) => {
-            await body(Object.assign({ multipart: true }, opts))(
-                ctx,
-                async () => {
-                    ctx.post = ctx.request.body;
-                    ctx.file = ctx.request.files;
-                }
-            );
+            if (!ctx.skipBody) {
+                await body(Object.assign({ multipart: true }, opts))(
+                    ctx,
+                    async () => {
+                        ctx.post = ctx.request.body;
+                        ctx.file = ctx.request.files;
+                    }
+                );
+            }
 
             await next();
         });

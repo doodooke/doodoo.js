@@ -1,7 +1,7 @@
 const crypto = require("crypto");
 const getRawBody = require("raw-body");
 const typeis = require("type-is");
-const { exec } = require("child_process");
+const shell = require("shelljs");
 
 /**
  * Get sha256 hmac signature
@@ -25,30 +25,10 @@ function signGithub(data, secret) {
     );
 }
 
-/**
- * Exec command
- * @param {String} command command
- * @param {String} options options
- */
-function execCommand(command, options) {
-    return new Promise((resolve, reject) => {
-        exec(command, options, (error, stdout, stderr) => {
-            if (error) {
-                reject(error);
-            } else {
-                resolve({
-                    stdout: stdout.toString(),
-                    stderr: stderr.toString()
-                });
-            }
-        });
-    });
-}
-
 async function execMessage(message, cmd = {}) {
     for (const key in cmd) {
         if (message.indexOf(key) !== -1) {
-            await execCommand(cmd[key]);
+            await shell.exec(cmd[key]);
         }
     }
 }
@@ -65,11 +45,11 @@ function isMaster(body) {
 //     secret: "xxx",
 //     isMaster: true,
 //     cmd: {
-//         start: "pm2 start pm2.json",
-//         restart: "pm2 restart pm2.json",
-//         stop: "pm2 stop pm2.json",
-//         pull: "git pull",
-//         install: "yarn install"
+//         "@start": "pm2 start pm2.json",
+//         "@restart": "pm2 restart pm2.json",
+//         "@stop": "pm2 stop pm2.json",
+//         "@pull": "git pull",
+//         "@install": "yarn install"
 //     }
 // });
 module.exports = options => {

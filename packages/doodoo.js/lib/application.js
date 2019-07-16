@@ -53,6 +53,7 @@ module.exports = class Application extends Koa {
 
         // this = new Koa();
         this.useBody = false;
+        this.useLogger = false;
         this.useRoute = false;
         this.options = options;
         this.notifyError = notifyError;
@@ -83,7 +84,6 @@ module.exports = class Application extends Koa {
             ctx.set("X-Powered-By", "doodoo.js");
             ctx.set("X-Response-Time", `${Date.now() - start}ms`);
         });
-        this.use(logger());
     }
 
     /**
@@ -107,11 +107,21 @@ module.exports = class Application extends Koa {
     }
 
     /**
+     * Use a logger middleware
+     * @param {*} opts
+     */
+    logger(opts = {}) {
+        // step 2
+        this.useLogger = true;
+        this.use(logger(opts));
+    }
+
+    /**
      * Use a body middleware
      * @description The middleware is finally loaded by default, which can be manually invoked.
      */
     body(opts = {}) {
-        // step 2
+        // step 3
         this.useBody = true;
         this.use(async (ctx, next) => {
             if (!ctx.skipBody) {
@@ -133,7 +143,7 @@ module.exports = class Application extends Koa {
      * @description The middleware automatically loads routes
      */
     route(allowedMethods) {
-        // step 3
+        // step 4
         this.useRoute = true;
 
         // router
@@ -153,7 +163,15 @@ module.exports = class Application extends Koa {
      * @returns {Server} http.createServer
      */
     async start() {
-        // step 4
+        // step 5
+        if (!this.useLogger) {
+            await this.logger();
+        }
+        if (!this.useBody) {
+            await this.body();
+        }
+
+        // step 6
         const _middleware = this.middleware;
         this.middleware = [];
         for (const key in _middleware) {
@@ -165,10 +183,7 @@ module.exports = class Application extends Koa {
             }
         }
 
-        // step 5
-        if (!this.useBody) {
-            await this.body();
-        }
+        // step 7
         if (!this.useRoute) {
             await this.route();
         }

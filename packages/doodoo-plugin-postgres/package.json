@@ -1,0 +1,39 @@
+{
+    "name": "doodoo-plugin-postgres",
+    "version": "0.0.1",
+    "description": "doodoo plugin postgres",
+    "keywords": [
+        "doodoo"
+    ],
+    "author": "heqing <786699892@qq.com>",
+    "homepage": "https://github.com/doodooke/doodoo.js#readme",
+    "license": "MIT",
+    "main": "lib/index.js",
+    "directories": {
+        "lib": "lib"
+    },
+    "files": [
+        "lib"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/doodooke/doodoo.js.git"
+    },
+    "dependencies": {
+        "bluebird": "^3.5.2",
+        "bookshelf": "^0.15.1",
+        "bookshelf-paranoia": "^0.13.1",
+        "bookshelf-uuid": "^1.0.1",
+        "debug": "^4.1.0",
+        "glob": "^7.1.3",
+        "knex": "^0.19.0",
+        "lodash": "^4.17.11",
+        "pg": "^7.12.0"
+    },
+    "scripts": {
+        "test": "echo \"Error: run tests from root\" && exit 1"
+    },
+    "bugs": {
+        "url": "https://github.com/doodooke/doodoo.js/issues"
+    }
+}

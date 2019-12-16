@@ -1,6 +1,6 @@
 {
   "name": "doodoo-plugin-redis",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "doodoo plugin redis",
   "keywords": [
     "doodoo"

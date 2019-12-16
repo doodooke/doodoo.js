@@ -17,7 +17,9 @@ async function usePlugin(plugin, options) {
             modulePath = "./plugin/" + plugin;
             required = require(modulePath);
         } catch (e) {
-            if (e.message !== `Cannot find module '${modulePath}'`) {
+            if (
+                e.message.indexOf(`Cannot find module '${modulePath}'`) === -1
+            ) {
                 throw e;
             }
 
@@ -25,10 +27,12 @@ async function usePlugin(plugin, options) {
                 modulePath = path.resolve("./plugin/" + plugin);
                 required = require(modulePath);
             } catch (e) {
-                if (e.message !== `Cannot find module '${modulePath}'`) {
+                if (
+                    e.message.indexOf(`Cannot find module '${modulePath}'`) ===
+                    -1
+                ) {
                     throw e;
                 }
-
                 required = await requirePlugin(plugin);
             }
         }
@@ -62,7 +66,7 @@ async function requirePlugin(name, options = {}) {
         const required = require(name);
         return required;
     } catch (e) {
-        if (e.message !== `Cannot find module '${name}'`) {
+        if (e.message.indexOf(`Cannot find module '${name}'`) === -1) {
             throw e;
         }
 

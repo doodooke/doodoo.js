@@ -2,7 +2,6 @@
   "name": "doodoo",
   "private": true,
   "scripts": {
-    "preinstall": "yarn config set registry https://registry.yarnpkg.com",
     "bootstrap": "yarn && lerna bootstrap",
     "eslint": "eslint ./packages",
     "eslint:fix": "eslint --fix ./packages"

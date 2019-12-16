@@ -44,17 +44,11 @@ class Query {
                                             _.camelCase(key)
                                         )
                                     ) {
-                                        return `${
-                                            qb.client.connectionSettings
-                                                .database
-                                        }.${val}`;
+                                        return `${qb.client.connectionSettings.database}.${val}`;
                                     } else {
                                         if (key !== "limit") {
                                             if (i === 0) {
-                                                return `${
-                                                    qb.client.connectionSettings
-                                                        .database
-                                                }.${val}`;
+                                                return `${qb.client.connectionSettings.database}.${val}`;
                                             } else {
                                                 return val;
                                             }
@@ -74,16 +68,11 @@ class Query {
                                         _.camelCase(key)
                                     )
                                 ) {
-                                    return `${
-                                        qb.client.connectionSettings.database
-                                    }.${val}`;
+                                    return `${qb.client.connectionSettings.database}.${val}`;
                                 } else {
                                     if (key !== "limit") {
                                         if (i === 0) {
-                                            return `${
-                                                qb.client.connectionSettings
-                                                    .database
-                                            }.${val}`;
+                                            return `${qb.client.connectionSettings.database}.${val}`;
                                         } else {
                                             return val;
                                         }

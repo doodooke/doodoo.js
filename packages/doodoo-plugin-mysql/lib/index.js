@@ -51,7 +51,7 @@ module.exports = (options = {}) => {
     // global bookshelf
     doodoo.getBookshelf = getBookshelf;
     doodoo.bookshelf = getBookshelf({
-        client: "mysql",
+        client: "mysql2",
         connection: connection
     });
 

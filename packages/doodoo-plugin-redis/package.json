@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "bluebird": "^3.5.2",
-    "redis": "^2.8.0"
+    "redis": "^3.1.1"
   },
   "gitHead": "7c95119ff21f2671875c491987bb1924c396f3e8"
 }
